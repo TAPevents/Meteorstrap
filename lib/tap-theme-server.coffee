@@ -18,7 +18,7 @@ bootstrapLESS = fs.readFileSync "#{bootstrapPath}#{rootFile}", 'utf8'
 
 ThemeCollection = new Meteor.Collection 'TAPtheme'
 
-
+Meteor.publish null, -> ThemeCollection.find()
 
 renderLess = (targetLess, addTheme) ->
 
