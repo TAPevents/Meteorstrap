@@ -4,7 +4,7 @@ Package.describe({
 
 Npm.depends({'less':'1.7.3'})
 
-var getPackageAssetsRecusively = function(packageName,folder){
+var getPackageAssets = function(packageName,folder){
     // local imports
     var _=Npm.require("underscore");
     var fs=Npm.require("fs");
@@ -57,7 +57,7 @@ Package.on_use(function (api) {
   ], ['server']);
 
   // Bootstrap + Theme Assets
-  api.add_files(getPackageAssetsRecusively("tap-theme","lib/less"),"server");
+  api.add_files(getPackageAssets("tap-theme","lib/less"),"server");
   api.add_files(['lib/tap-theme-server.coffee'],"server");
 
   api.add_files([
