@@ -2,7 +2,9 @@ Package.describe({
   summary: 'A Reactive Bootstrap Theme Editor for Meteor'
 });
 
-function getFilesFromFolder(packageName,folder){
+Npm.depends({'less':'1.7.3'})
+
+var getPackageAssetsRecusively = function(packageName,folder){
     // local imports
     var _=Npm.require("underscore");
     var fs=Npm.require("fs");
@@ -43,22 +45,21 @@ function getFilesFromFolder(packageName,folder){
 
 Package.on_use(function (api) {
   api.use([
+    'coffeescript'
+  ], ['client','server']);
 
+  api.use([
+    'templating'
   ], ['client']);
 
   api.use([
 
   ], ['server']);
 
-  api.use([
-    'coffeescript'
-  ], ['client','server']);
+  // Bootstrap + Theme Assets
+  api.add_files(getPackageAssetsRecusively("tap-theme","lib/less"),"server");
+  api.add_files(['lib/tap-theme-server.coffee'],"server");
 
-  var lessAssets = getFilesFromFolder("tap-theme","lib/less");
-
-  api.add_files(lessAssets,"server");
-
-  api.add_files([
-    'lib/less_compiler.coffee'
-  ], 'server');
+  api.add_files(['lib/tap-theme-client-templates.html'],"client");
+  api.add_files(['lib/tap-theme-client.coffee'],"client");
 });
