@@ -60,6 +60,9 @@ Package.on_use(function (api) {
   api.add_files(getPackageAssetsRecusively("tap-theme","lib/less"),"server");
   api.add_files(['lib/tap-theme-server.coffee'],"server");
 
-  api.add_files(['lib/tap-theme-client-templates.html'],"client");
-  api.add_files(['lib/tap-theme-client.coffee'],"client");
+  api.add_files([
+    'lib/bootstrap.js',
+    'lib/tap-theme-client-templates.html',
+    'lib/tap-theme-client.coffee'
+  ],"client");
 });
