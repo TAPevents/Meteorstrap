@@ -66,7 +66,7 @@ updateTheme = (customLESS) ->
     bootstrapCSS : renderLess bootstrapLESS, true
 
   # render custom css if present
-  if customLESS
+  if customLESS?
     update.customLESS = customLESS
     update.customCSS = renderLess customLESS
 
@@ -125,7 +125,7 @@ Meteor.methods
     ThemeCollection.update {_id:'main'}, {$set: update}
     updateTheme()
 
-  'TAPtheme_updateTheme' : updateTheme
+  'TAPtheme_updateCustomCSS' : updateTheme
 
   'TAPtheme_switchTheme' : (theme) ->
     ThemeCollection.update 'main', {$set: {theme: theme}}

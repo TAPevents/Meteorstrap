@@ -35,7 +35,7 @@ Template.TAPtheme.events
     Meteor.call 'TAPtheme_updateLessVariable', @.name, $(e.currentTarget).val()
 
   'change textarea.custom-css' : (e) ->
-    Meteor.call 'TAPtheme_updateTheme', $(e.currentTarget).val()
+    Meteor.call 'TAPtheme_updateCustomCSS', $(e.currentTarget).val()
 
   'change select.switch-theme' : (e) ->
     Meteor.call 'TAPtheme_switchTheme', $(e.currentTarget).val()
