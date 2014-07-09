@@ -73,9 +73,9 @@ updateTheme = (customLESS) ->
   # update collection with rendered css
   ThemeCollection.update 'main', {$set: update}
 
-# bootstrap coillection on first load
+# 'bootstrap' the collection on first load
 if ThemeCollection.find().count() is 0
-  # move me to be handled by TAPi18n
+  # to be handled by TAPi18n...
   descriptions =
     "@gray-dark" : "Main Body Text"
     "@body-bg" : "Background Colour"
@@ -85,16 +85,16 @@ if ThemeCollection.find().count() is 0
     parser.parse originalVariables, (err,cssTree) ->
       lessVars = []
       for rule in cssTree.rules
-        unless rule.silent
+        if rule.variable
+          lessVar =
+            name: rule.name
           try
-            lessVar =
-              name: rule.name
-              val: rule.value.toCSS()
+            lessVar.val = rule.value.toCSS()
+          catch
+            lessVar.val = rule.value.value[0].value[0].name
 
-            lessVar.desc = descriptions[lessVar.name] # USE TAPi18n
-
-            lessVars.push lessVar
-
+          lessVar.desc = descriptions[lessVar.name] # USE TAPi18n on client instead
+          lessVars.push lessVar
       done null, lessVars
 
   ThemeCollection.insert
