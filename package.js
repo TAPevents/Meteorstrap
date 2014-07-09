@@ -45,7 +45,8 @@ var getPackageAssets = function(packageName,folder){
 
 Package.on_use(function (api) {
   api.use([
-    'coffeescript'
+    'coffeescript',
+    'tap-i18n'
   ], ['client','server']);
 
   api.use([
@@ -56,13 +57,23 @@ Package.on_use(function (api) {
 
   ], ['server']);
 
+  // i18n
+  api.add_files(['package-tap.i18n'], ["client", "server"]);
+
   // Bootstrap + Theme Assets
   api.add_files(getPackageAssets("tap-theme","lib/less"),"server");
   api.add_files(['lib/tap-theme-server.coffee'],"server");
 
+
   api.add_files([
     'lib/bootstrap.js',
     'lib/tap-theme-client-templates.html',
-    'lib/tap-theme-client.coffee'
+    'lib/tap-theme-client.coffee',
+    // i18n files
+    'i18n/en.i18n.json'
   ],"client");
+
+
+
+
 });

@@ -1,0 +1,11 @@
+{
+  "variable_name" : "Variable Name",
+  "override" : "Override",
+  "bootstrap_default" : "Bootstrap Default",
+  "description" : "Desciption",
+  "describe_@gray-dark" : "Usually the main text value",
+  "describe_@brand-primary" : "Main Brand Colours",
+  "describe_@font-size-base" : "Base font size from which all fonts inherit",
+  "describe_@font-family-sans-serif": "The primary font",
+  "describe_@headings-font-weight" : "Thickness of heading text"
+}

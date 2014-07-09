@@ -36,6 +36,7 @@ Template.TAPtheme_bootstrap_var_table.helpers
         key: key
         val: val
         override: rule_overrides[key]
+        description: __ "describe_#{key}", { defaultValue: "" }
     return rules
 
 Template.TAPtheme.events

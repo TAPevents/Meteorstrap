@@ -5,5 +5,7 @@
   "author": "Chris Hitchcott <hitchcott@gmail.com> for TAPevents",
   "version": "0.1.0",
   "git": "https://github.com/TAPevents/tap-theme.git",
-  "packages": {}
+  "packages": {
+    "tap-i18n": {}
+  }
 }

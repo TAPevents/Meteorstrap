@@ -22,16 +22,23 @@ If you already have bootstrap-3 in your package, remove it.
 
 ` $ mrt remove bootstrap-3 `
 
+## Features
+
+* Theme Presets and Switching - Includes all Bootswatch Themes
+* On-the-fly css updates to all clients without refreshing their browser
+* Super-detailed tweaking without CSS knowledge using Bootsrap's 369 variables
+* Free-type custom CSS overrides
+
 ## Coming soon
 
 * Security for updating theme (use collection-hooks on server instead of methods, access control with regualr publish/subscribe)
-* Font Uploads / Selection
+* Font Uploads
 * Change delivery method -- Use JSON/AJAX?
 * Glyphicons Support
 * More themes
 * Editor UI Improvements 
   * Organized variable editor (into 'Simple', 'Advanced')
-  * Controls for color picker, etc.
+  * Controls for color picker, font dropdown, etc.
   * Create and Save Custom Themes
 
 ## License

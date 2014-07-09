@@ -36,22 +36,22 @@
 
 
 <template name="TAPtheme_bootstrap_var_table">
-  <table class='table'>
+  <table class='table table-striped'>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Override</th>
-        <th>Defaut</th>
-        <th>Description</th>
+        <th>{{_ "variable_name"}}</th>
+        <th width="40%">{{_ "override"}}</th>
+        <th>{{_ "bootstrap_default"}}</th>
+        <th>{{_ "description"}}</th>
       </tr>
     </thead>
     <tbody>
       {{#each rules}}
-        <tr class="{{#if desc}}warning{{/if}}">
+        <tr class="{{#if description}}warning{{/if}}">
           <td>{{key}}</td>
-          <td><input class='variable-override form-control' name="{{key}}" type='text' value="{{override}}"/></td>
+          <td width="40%"><input class='variable-override form-control' name="{{key}}" type='text' value="{{override}}"/></td>
           <td>{{val}}</td>
-          <td>{{desc}}</td>
+          <td>{{description}}</td>
         </tr>
         {{/each}}
     </tbody>
