@@ -1,6 +1,5 @@
 fs = Npm.require 'fs'
-less = Npm.require('less')
-fs = Npm.require('fs')
+less = Npm.require 'less'
 
 assetPath = './assets/packages/tap-theme/lib/less/'
 bootstrapPath = assetPath+'bootstrap/'
@@ -103,6 +102,21 @@ if ThemeCollection.find().count() is 0
     variables: defaultVaraibles()
 
   updateTheme()
+
+getThemes = ->
+  themes = ['null']
+  for themeFolder in fs.readdirSync themesPath
+    # only add folders
+    if fs.lstatSync(themesPath+themeFolder).isDirectory()
+      themes.push themeFolder
+
+  ThemeCollection.update 'main',
+    $set:
+      availableThemes: themes
+
+# get themes on startup
+getThemes()
+
 
 Meteor.methods
   'TAPtheme_updateLessVariable' : (key, val) ->

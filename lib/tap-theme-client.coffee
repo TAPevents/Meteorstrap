@@ -14,10 +14,17 @@ Meteor.startup ->
     $bootstrapCSS.html TAPtheme().bootstrapCSS
     $customCSS.html TAPtheme().customCSS
 
+toTitlecase = (str) ->
+  str.replace /\w\S*/g, (txt) -> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
 
 Template.TAPtheme.helpers
   'theme' : -> TAPtheme()
-  'isSelected' : (theme) -> TAPtheme().theme is theme
+  'themes' : ->
+    selected = TAPtheme().theme
+    _.map TAPtheme().availableThemes, (theme) ->
+      name: theme
+      title: if theme is 'null' then 'Vanilla Bootstrap' else toTitlecase theme
+      selected: theme is selected
 
 Template.TAPtheme_bootstrap_var_table.helpers
   'override' : -> TAPtheme().rule_overrides?[@name]

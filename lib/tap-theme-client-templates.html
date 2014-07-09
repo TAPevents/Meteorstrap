@@ -1,42 +1,34 @@
 <template name="TAPtheme">
   <div id="tap-theme">
-    <h1>Edit the text <a href="#">below</a> to update CSS reactively</h1>
-    {{#with theme}}
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Switch Theme</h3>
-        <select class='switch-theme form-control'>
-          <option value='null' selected="{{#if isSelected 'null'}}selected{{/if}}">Vanilla Bootstrap</option>
-          <option value="amelia" selected="{{#if isSelected 'amelia'}}selected{{/if}}">Amelia</option>
-          <option value="cerulean" selected="{{#if isSelected 'cerulean'}}selected{{/if}}">Cerulean</option>
-          <option value="cosmo" selected="{{#if isSelected 'cosmo'}}selected{{/if}}">Cosmo</option>
-          <option value="cyborg" selected="{{#if isSelected 'cyborg'}}selected{{/if}}">Cyborg</option>
-          <option value="darkly" selected="{{#if isSelected 'darkly'}}selected{{/if}}">Darkly</option>
-          <option value="flatly" selected="{{#if isSelected 'flatly'}}selected{{/if}}">Flatly</option>
-          <option value="lumen" selected="{{#if isSelected 'lumen'}}selected{{/if}}">Lumen</option>
-          <option value="readable" selected="{{#if isSelected 'readable'}}selected{{/if}}">Readable</option>
-          <option value="simplex" selected="{{#if isSelected 'simplex'}}selected{{/if}}">Simplex</option>
-          <option value="slate" selected="{{#if isSelected 'slate'}}selected{{/if}}">Slate</option>
-          <option value="spacelab" selected="{{#if isSelected 'spacelab'}}selected{{/if}}">Spacelab</option>
-          <option value="superhero" class="{{#if isSelected 'superhero'}}selected{{/if}}">Superhero</option>
-          <option value="united" selected="{{#if isSelected 'united'}}selected{{/if}}">United</option>
-          <option value="yeti" selected="{{#if isSelected 'yeti'}}selected{{/if}}">Yeti</option>
-        </select>
-        <h3>Enter Custom CSS</h3>
-        <textarea class='custom-css form-control' placeholder='Custom CSS Support' rows='10'>{{customLESS}}</textarea>
+    {{#unless theme.availableThemes}}
+      <p>No Theme Collection found.</p>
+    {{else}}
+      <h1>Edit the text <a href="#">below</a> to update CSS reactively</h1>
+      {{#with theme}}
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Switch Theme</h3>
+          <select class='switch-theme form-control'>
+            {{#each themes}}
+              <option value='{{name}}' selected="{{#if selected}}selected{{/if}}">{{title}}</option>
+            {{/each}}
+          </select>
+          <h3>Enter Custom CSS</h3>
+          <textarea class='custom-css form-control' placeholder='Custom CSS Support' rows='10'>{{customLESS}}</textarea>
+        </div>
+        <div class="col-md-6">
+          <h3>Live Preview</h3>
+          <div class="btn btn-primary">Primary</div>
+          <div class="btn btn-success">Success</div>
+          <div class="btn btn-info">Info</div>
+          <div class="btn btn-warning">Warning</div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <h3>Live Preview</h3>
-        <div class="btn btn-primary">Primary</div>
-        <div class="btn btn-success">Success</div>
-        <div class="btn btn-info">Info</div>
-        <div class="btn btn-warning">Warning</div>
-      </div>
-    </div>
-    <hr>
-      <h2>Edit Boostrap LESS Rules</h2>
-      {{> TAPtheme_bootstrap_var_table}}
-    {{/with}}
+      <hr>
+        <h2>Edit Boostrap LESS Rules</h2>
+        {{> TAPtheme_bootstrap_var_table}}
+      {{/with}}
+    {{/unless}}
   </div>
 </template>
 
