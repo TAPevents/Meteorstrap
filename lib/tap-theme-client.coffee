@@ -27,7 +27,9 @@ Template.TAPtheme.helpers
       selected: theme is selected
 
 Template.TAPtheme_bootstrap_var_table.helpers
-  'override' : -> TAPtheme().rule_overrides?[@name]
+  'override' : ->
+    # use nonReactive for rule overrides, otherwise blaze has to reredner every box on update
+    TAPtheme_collection.findOne('main', {reactive:false}).rule_overrides?[@name]
 
 Template.TAPtheme.events
   'change input.variable-override': (e) ->
