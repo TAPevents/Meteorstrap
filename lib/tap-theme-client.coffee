@@ -17,8 +17,10 @@ Meteor.startup ->
 
 Template.TAPtheme.helpers
   'theme' : -> TAPtheme()
-  'override' : -> TAPtheme().rule_overrides?[@name]
   'isSelected' : (theme) -> TAPtheme().theme is theme
+
+Template.TAPtheme_bootstrap_var_table.helpers
+  'override' : -> TAPtheme().rule_overrides?[@name]
 
 Template.TAPtheme.events
   'change input.variable-override': (e) ->
