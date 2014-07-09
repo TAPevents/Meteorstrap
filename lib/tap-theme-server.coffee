@@ -124,10 +124,14 @@ Meteor.publish null, -> ThemeCollection.find()
 
 Meteor.methods
   'TAPtheme_updateLessVariable' : (key, val) ->
-    console.log 'updating', key,val
-    update = {}
-    update["rule_overrides.#{key}"] = val || null
-    ThemeCollection.update {_id:'main'}, {$set: update}
+    if val
+      update = {$set: {}}
+      update.$set["rule_overrides.#{key}"] = val
+    else
+      update = {$unset: {}}
+      update.$unset["rule_overrides.#{key}"] = ""
+
+    ThemeCollection.update {_id:'main'}, update
     updateTheme()
 
   'TAPtheme_updateCustomCSS' : updateTheme
