@@ -6,18 +6,17 @@ bootstrapPath = assetPath+'bootstrap/'
 themesPath = assetPath+'themes/'
 variablesFile = 'variables.import.less'
 rootFile = 'bootstrap.import.less'
+# read once, keep in memory for future use
+originalVariables = fs.readFileSync "#{bootstrapPath}#{variablesFile}", 'utf8'
+bootstrapLESS = fs.readFileSync "#{bootstrapPath}#{rootFile}", 'utf8'
 
 parser = new less.Parser
   paths: [bootstrapPath]
   filename: rootFile
 
-# read once, keep in memory for future use
-originalVariables = fs.readFileSync "#{bootstrapPath}#{variablesFile}", 'utf8'
-bootstrapLESS = fs.readFileSync "#{bootstrapPath}#{rootFile}", 'utf8'
-
 ThemeCollection = new Meteor.Collection 'TAPtheme'
 
-Meteor.publish null, -> ThemeCollection.find()
+# HELPERS
 
 renderLess = (targetLess, addTheme) ->
 
@@ -28,7 +27,7 @@ renderLess = (targetLess, addTheme) ->
 
   for key, val of ThemeCollection.findOne('main')?.rule_overrides || {}
     if val and val isnt ''
-      customVariables+= "#{key}: #{val};"
+      customVariables+= "#{key}: #{val};\n"
 
   if addTheme
     themeName = ThemeCollection.findOne('main').theme
@@ -73,36 +72,6 @@ updateTheme = (customLESS) ->
   # update collection with rendered css
   ThemeCollection.update 'main', {$set: update}
 
-# 'bootstrap' the collection on first load
-if ThemeCollection.find().count() is 0
-  # to be handled by TAPi18n...
-  descriptions =
-    "@gray-dark" : "Main Body Text"
-    "@body-bg" : "Background Colour"
-    "@brand-primary" : "Button Colours"
-  # do a test with only original vars
-  defaultVaraibles = Meteor._wrapAsync (done) ->
-    parser.parse originalVariables, (err,cssTree) ->
-      lessVars = []
-      for rule in cssTree.rules
-        if rule.variable
-          lessVar =
-            name: rule.name
-          try
-            lessVar.val = rule.value.toCSS()
-          catch
-            lessVar.val = rule.value.value[0].value[0].name
-
-          lessVar.desc = descriptions[lessVar.name] # USE TAPi18n on client instead
-          lessVars.push lessVar
-      done null, lessVars
-
-  ThemeCollection.insert
-    _id: 'main'
-    variables: defaultVaraibles()
-
-  updateTheme()
-
 getThemes = ->
   themes = ['null']
   for themeFolder in fs.readdirSync themesPath
@@ -114,12 +83,48 @@ getThemes = ->
     $set:
       availableThemes: themes
 
-# get themes on startup
+
+getLessVars = (lessStr) ->
+  lines = lessStr.split('\n')
+  lessVars = {}
+  for line in lines
+    if line.indexOf('@') is 0
+      keyVar = line.split(';')[0].split(':')
+      lessVars[keyVar[0]] = keyVar[1].trim()
+  return lessVars
+
+
+
+
+
+# populate variables on first load
+if ThemeCollection.find().count() is 0
+
+  ThemeCollection.insert
+    _id: 'main'
+    defaultVars: getLessVars originalVariables
+
+  # generate vanilla boostrap on first load
+  updateTheme()
+
+
+# always get themes on startup
 getThemes()
 
 
+# always publish the ThemeCollection's relevent fields
+# TODO make this only publish CSS fields
+
+Meteor.publish null, -> ThemeCollection.find()
+
+
+
+
+# TODO Convert these to observe
+
 Meteor.methods
   'TAPtheme_updateLessVariable' : (key, val) ->
+    console.log 'updating', key,val
     update = {}
     update["rule_overrides.#{key}"] = val || null
     ThemeCollection.update {_id:'main'}, {$set: update}

@@ -1,6 +1,6 @@
 TAPtheme_collection = new Meteor.Collection 'TAPtheme'
 
-@TAPtheme = -> TAPtheme_collection.findOne('main') || {}
+TAPtheme = -> TAPtheme_collection.findOne('main') || {}
 
 Meteor.startup ->
   $bootstrapCSS = $("<style id='tap-theme-bootstrap'></style>")
@@ -28,11 +28,19 @@ Template.TAPtheme.helpers
       selected: theme is selected
 
 Template.TAPtheme_bootstrap_var_table.helpers
-  'override' : (theme) -> theme.rule_overrides[@name]
+  'rules' : ->
+    rules = []
+    rule_overrides = @rule_overrides || {}
+    for key,val of @defaultVars
+      rules.push
+        key: key
+        val: val
+        override: rule_overrides[key]
+    return rules
 
 Template.TAPtheme.events
   'change input.variable-override': (e) ->
-    Meteor.call 'TAPtheme_updateLessVariable', @.name, $(e.currentTarget).val()
+    Meteor.call 'TAPtheme_updateLessVariable', @key, $(e.currentTarget).val()
 
   'change textarea.custom-css' : (e) ->
     Meteor.call 'TAPtheme_updateCustomCSS', $(e.currentTarget).val()

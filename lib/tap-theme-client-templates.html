@@ -13,7 +13,7 @@
               <option value='{{name}}' selected="{{#if selected}}selected{{/if}}">{{title}}</option>
             {{/each}}
           </select>
-          <h3>Enter Custom CSS</h3>
+          <h3>Enter Custom LESS <small class='muted'>You can use Bootstrap variables.</small></h3>
           <textarea class='custom-css form-control' placeholder='Custom CSS Support' rows='10'>{{customLESS}}</textarea>
         </div>
         <div class="col-md-6">
@@ -46,10 +46,10 @@
       </tr>
     </thead>
     <tbody>
-      {{#each variables}}
+      {{#each rules}}
         <tr class="{{#if desc}}warning{{/if}}">
-          <td>{{name}}</td>
-          <td><input class='variable-override form-control' name="{{name}}" type='text' value="{{override ..}}"/></td>
+          <td>{{key}}</td>
+          <td><input class='variable-override form-control' name="{{key}}" type='text' value="{{override}}"/></td>
           <td>{{val}}</td>
           <td>{{desc}}</td>
         </tr>
