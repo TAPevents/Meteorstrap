@@ -24,10 +24,12 @@
           <div class="btn btn-warning">Warning</div>
         </div>
       </div>
+      {{/with}}
       <hr>
         <h2>Edit Boostrap LESS Rules</h2>
-        {{> TAPtheme_bootstrap_var_table}}
-      {{/with}}
+        {{#with theme_nonReactive}}
+          {{> TAPtheme_bootstrap_var_table}}
+        {{/with}}
     {{/unless}}
   </div>
 </template>
@@ -47,7 +49,7 @@
       {{#each variables}}
         <tr class="{{#if desc}}warning{{/if}}">
           <td>{{name}}</td>
-          <td><input class='variable-override form-control' name="{{name}}" type='text' value="{{override}}"/></td>
+          <td><input class='variable-override form-control' name="{{name}}" type='text' value="{{override ..}}"/></td>
           <td>{{val}}</td>
           <td>{{desc}}</td>
         </tr>

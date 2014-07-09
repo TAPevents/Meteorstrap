@@ -19,6 +19,7 @@ toTitlecase = (str) ->
 
 Template.TAPtheme.helpers
   'theme' : -> TAPtheme()
+  'theme_nonReactive' : -> TAPtheme_collection.findOne('main', {reactive:false})
   'themes' : ->
     selected = TAPtheme().theme
     _.map TAPtheme().availableThemes, (theme) ->
@@ -27,9 +28,7 @@ Template.TAPtheme.helpers
       selected: theme is selected
 
 Template.TAPtheme_bootstrap_var_table.helpers
-  'override' : ->
-    # use nonReactive for rule overrides, otherwise blaze has to reredner every box on update
-    TAPtheme_collection.findOne('main', {reactive:false}).rule_overrides?[@name]
+  'override' : (theme) -> theme.rule_overrides[@name]
 
 Template.TAPtheme.events
   'change input.variable-override': (e) ->
