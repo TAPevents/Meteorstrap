@@ -27,33 +27,7 @@
       {{/with}}
       <hr>
         <h2>Edit Boostrap LESS Rules</h2>
-        {{#with theme_nonReactive}}
-          {{> TAPtheme_bootstrap_var_table}}
-        {{/with}}
+        {{> BootstrapMagic}}
     {{/unless}}
   </div>
-</template>
-
-
-<template name="TAPtheme_bootstrap_var_table">
-  <table class='table table-striped'>
-    <thead>
-      <tr>
-        <th>{{_ "variable_name"}}</th>
-        <th width="40%">{{_ "override"}}</th>
-        <th>{{_ "bootstrap_default"}}</th>
-        <th>{{_ "description"}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each rules}}
-        <tr class="{{#if description}}warning{{/if}}">
-          <td>{{key}}</td>
-          <td width="40%"><input class='variable-override form-control' name="{{key}}" type='text' value="{{override}}"/></td>
-          <td>{{val}}</td>
-          <td>{{description}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-  </table>
 </template>

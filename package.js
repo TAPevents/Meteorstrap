@@ -14,7 +14,8 @@ Package.on_use(function (api) {
   ], ['client','server']);
 
   api.use([
-    'templating'
+    'templating',
+    'bootstrap-magic'
   ], ['client']);
 
   api.use([
