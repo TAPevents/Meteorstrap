@@ -1,6 +1,6 @@
 TAPtheme_collection = new Meteor.Collection 'TAPtheme'
 
-TAPtheme = -> TAPtheme_collection.findOne('main') || {}
+@TAPtheme = -> TAPtheme_collection.findOne('main') || {}
 
 Meteor.startup ->
   $bootstrapCSS = $("<style id='tap-theme-bootstrap'></style>")
@@ -27,17 +27,10 @@ Template.TAPtheme.helpers
       title: if theme is 'null' then 'Vanilla Bootstrap' else toTitlecase theme
       selected: theme is selected
 
-Template.TAPtheme_bootstrap_var_table.helpers
-  'rules' : ->
-    rules = []
-    rule_overrides = @rule_overrides || {}
-    for key,val of @defaultVars
-      rules.push
-        key: key
-        val: val
-        override: rule_overrides[key]
-        description: __ "describe_#{key}", { defaultValue: "" }
-    return rules
+BootstrapMagic.on 'change', (change) ->
+  key = Object.keys(change)[0]
+  val = change[key]
+  Meteor.call 'TAPtheme_updateLessVariable', key, val
 
 Template.TAPtheme.events
   'change input.variable-override': (e) ->
