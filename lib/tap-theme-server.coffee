@@ -47,6 +47,9 @@ renderLess = (targetLess, addTheme) ->
   if addTheme
     lessBundle+= themeLess
 
+  # add font path specific to TAPtheme for glyphicons
+  lessBundle+= "@icon-font-path: \"/packages/tap-theme/lib/fonts/\";\n"
+
   # add rule overrides
   lessBundle+= customVariables
 

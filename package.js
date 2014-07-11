@@ -29,6 +29,8 @@ Package.on_use(function (api) {
   api.add_files(getPackageAssets("tap-theme","lib/less"),"server");
   api.add_files(['lib/tap-theme-server.coffee'],"server");
 
+  // bootstrap fonts
+  api.add_files(getPackageAssets("tap-theme","lib/fonts"),"client");
 
   api.add_files([
     'lib/bootstrap.js',
