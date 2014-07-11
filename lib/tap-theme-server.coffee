@@ -88,16 +88,31 @@ getThemes = ->
 
 
 getLessVars = (lessStr) ->
-  lines = lessStr.split('\n')
-  lessVars = {}
+  # get the computed CSS, so colorpicker works
+  # use http://stackoverflow.com/a/22867621/2682159
+  parseHack = ".foo {"
+
+  lines = "#{lessStr}".split('\n')
   for line in lines
     if line.indexOf('@') is 0
       keyVar = line.split(';')[0].split(':')
-      lessVars[keyVar[0]] = keyVar[1].trim()
-  return lessVars
+      k = keyVar[0].substr(1)
+      parseHack+= "#{k}: @#{k};"
 
+  parseHack+= " };"
 
+  parsedLess = Meteor._wrapAsync (done) ->
+    parser.parse lessStr+parseHack, done
 
+  parsedLessDefaults = {}
+
+  cssLines = parsedLess().toCSS().split('\n').slice(1, -2)
+  for line in cssLines
+    keyVar = line.split(';')[0].split(':')
+    console.log keyVar
+    parsedLessDefaults["@#{keyVar[0].trim()}"] = keyVar[1].trim()
+
+  return parsedLessDefaults
 
 
 # populate variables on first load

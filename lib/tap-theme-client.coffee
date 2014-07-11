@@ -27,15 +27,17 @@ Template.TAPtheme.helpers
       title: if theme is 'null' then 'Vanilla Bootstrap' else toTitlecase theme
       selected: theme is selected
 
+
+BootstrapMagic.on 'start', ->
+  @setOverrides TAPtheme().rule_overrides
+  @setDefaults TAPtheme().defaultVars
+
 BootstrapMagic.on 'change', (change) ->
   key = Object.keys(change)[0]
   val = change[key]
   Meteor.call 'TAPtheme_updateLessVariable', key, val
 
 Template.TAPtheme.events
-  'change input.variable-override': (e) ->
-    Meteor.call 'TAPtheme_updateLessVariable', @key, $(e.currentTarget).val()
-
   'change textarea.custom-css' : (e) ->
     Meteor.call 'TAPtheme_updateCustomCSS', $(e.currentTarget).val()
 
