@@ -1,41 +1,121 @@
 Package.describe({
-  summary: 'A Reactive Bootstrap Theme Editor for Meteor'
+  summary: 'A Reactive Bootstrap Theme Compiler',
+  name: 'tap:bootstrap-themer',
+  version:'0.1.0',
+  git:'https://github.com/TAPevents/bootstrap-themer'
 });
 
 Npm.depends({'less':'1.7.3'})
 
-// Get package assets recursively
-var getPackageAssets=function(a,b){function f(a){var b=[],g=d.readdirSync(a);return c.each(g,function(c){var g=a+e.sep+c,h=d.statSync(g);h.isDirectory()?b=b.concat(f(g)):b.push(g)}),b}var c=Npm.require("underscore"),d=Npm.require("fs"),e=Npm.require("path"),g=process.cwd();process.chdir("packages"+e.sep+a);var h=f(b);return process.chdir(g),h};
-
 Package.on_use(function (api) {
+
+  api.versionsFrom('1.1.0.2');
+
   api.use([
     'coffeescript',
-    'tap-i18n'
+    'tap:i18n@1.5.0'
   ], ['client','server']);
 
   api.use([
     'templating',
-    'bootstrap-magic'
+    'hitchcott:bootstrap-magic@0.1.0'
   ], ['client']);
-
-  api.use([
-
-  ], ['server']);
 
   // i18n
   api.add_files(['package-tap.i18n'], ["client", "server"]);
 
-  // Bootstrap + Theme Assets
-  api.add_files(getPackageAssets("tap-theme","lib/less"),"server");
-  api.add_files(['lib/tap-theme-server.coffee'],"server");
+  // Bootstrap Server-side assets
+  api.add_files([
+    // import variables
+    'lib/less/bootstrap/alerts.import.less',
+    'lib/less/bootstrap/badges.import.less',
+    'lib/less/bootstrap/bootstrap.import.less',
+    'lib/less/bootstrap/breadcrumbs.import.less',
+    'lib/less/bootstrap/button-groups.import.less',
+    'lib/less/bootstrap/buttons.import.less',
+    'lib/less/bootstrap/carousel.import.less',
+    'lib/less/bootstrap/close.import.less',
+    'lib/less/bootstrap/code.import.less',
+    'lib/less/bootstrap/component-animations.import.less',
+    'lib/less/bootstrap/dropdowns.import.less',
+    'lib/less/bootstrap/forms.import.less',
+    'lib/less/bootstrap/glyphicons.import.less',
+    'lib/less/bootstrap/grid.import.less',
+    'lib/less/bootstrap/input-groups.import.less',
+    'lib/less/bootstrap/jumbotron.import.less',
+    'lib/less/bootstrap/labels.import.less',
+    'lib/less/bootstrap/list-group.import.less',
+    'lib/less/bootstrap/media.import.less',
+    'lib/less/bootstrap/mixins.import.less',
+    'lib/less/bootstrap/modals.import.less',
+    'lib/less/bootstrap/navbar.import.less',
+    'lib/less/bootstrap/navs.import.less',
+    'lib/less/bootstrap/normalize.import.less',
+    'lib/less/bootstrap/pager.import.less',
+    'lib/less/bootstrap/pagination.import.less',
+    'lib/less/bootstrap/panels.import.less',
+    'lib/less/bootstrap/popovers.import.less',
+    'lib/less/bootstrap/print.import.less',
+    'lib/less/bootstrap/progress-bars.import.less',
+    'lib/less/bootstrap/responsive-utilities.import.less',
+    'lib/less/bootstrap/scaffolding.import.less',
+    'lib/less/bootstrap/tables.import.less',
+    'lib/less/bootstrap/theme.import.less',
+    'lib/less/bootstrap/thumbnails.import.less',
+    'lib/less/bootstrap/tooltip.import.less',
+    'lib/less/bootstrap/type.import.less',
+    'lib/less/bootstrap/utilities.import.less',
+    'lib/less/bootstrap/variables.import.less',
+    'lib/less/bootstrap/wells.import.less',
+    // import themes
+    'lib/less/themes/amelia/bootswatch.less',
+    'lib/less/themes/amelia/variables.less',
+    'lib/less/themes/cerulean/bootswatch.less',
+    'lib/less/themes/cerulean/variables.less',
+    'lib/less/themes/cosmo/bootswatch.less',
+    'lib/less/themes/cosmo/variables.less',
+    'lib/less/themes/cyborg/bootswatch.less',
+    'lib/less/themes/cyborg/variables.less',
+    'lib/less/themes/darkly/bootswatch.less',
+    'lib/less/themes/darkly/variables.less',
+    'lib/less/themes/flatly/bootswatch.less',
+    'lib/less/themes/flatly/variables.less',
+    'lib/less/themes/lumen/bootswatch.less',
+    'lib/less/themes/lumen/variables.less',
+    'lib/less/themes/readable/bootswatch.less',
+    'lib/less/themes/readable/variables.less',
+    'lib/less/themes/simplex/bootswatch.less',
+    'lib/less/themes/simplex/variables.less',
+    'lib/less/themes/slate/bootswatch.less',
+    'lib/less/themes/slate/variables.less',
+    'lib/less/themes/spacelab/bootswatch.less',
+    'lib/less/themes/spacelab/variables.less',
+    'lib/less/themes/superhero/bootswatch.less',
+    'lib/less/themes/superhero/variables.less',
+    'lib/less/themes/united/bootswatch.less',
+    'lib/less/themes/united/variables.less',
+    'lib/less/themes/yeti/bootswatch.less',
+    'lib/less/themes/yeti/variables.less'
+  ],"server");
 
-  // bootstrap fonts
-  api.add_files(getPackageAssets("tap-theme","lib/fonts"),"client");
+  // Bootstrap Client-side Assets
+  api.add_files([
+    'lib/fonts/glyphicons-halflings-regular.eot',
+    'lib/fonts/glyphicons-halflings-regular.svg',
+    'lib/fonts/glyphicons-halflings-regular.ttf',
+    'lib/fonts/glyphicons-halflings-regular.woff',
+    'lib/bootstrap.js'
+  ],"client");
+
+
+  // Package files
+  api.add_files([
+    'bootstrap-themer-server.coffee'
+  ],"server");
 
   api.add_files([
-    'lib/bootstrap.js',
-    'lib/tap-theme-client-templates.html',
-    'lib/tap-theme-client.coffee',
+    'bootstrap-themer-client-templates.html',
+    'bootstrap-themer-client.coffee',
     // i18n files
     'i18n/en.i18n.json'
   ],"client");

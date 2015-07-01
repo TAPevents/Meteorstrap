@@ -1,26 +1,22 @@
-# TAPtheme
+# BootstrapThemer
 
 **A Reactive Bootstrap Theme Editor for Meteor**
 
-TAPtheme reactively compiles [Bootstrap 3](https://github.com/twbs/bootstrap) with user-defined custom variables and delivers the CSS to clients, who will have their stylesheets updated without refreshing their browser.
+BootstrapThemer reactively compiles [Bootstrap 3](https://github.com/twbs/bootstrap) with user-defined custom variables and delivers the CSS to clients, who will have their stylesheets updated without refreshing their browser.
 
-The [Bootstrap Magic](https://github.com/pikock/bootstrap-magic) package is implemented to allow easy editing of all of Bootstrap 3's LESS variables.
+The [Bootstrap Magic](https://github.com/hitchcott/meteor-bootstrap-magic) package is implemented to allow easy editing of all of Bootstrap 3's LESS variables.
 
-TAPtheme comes bundled with several [Bootswatch](https://github.com/thomaspark/bootswatch/) themes.
+BootstrapThemer comes bundled with several [Bootswatch](https://github.com/thomaspark/bootswatch/) themes.
 
 ## Quickstart
 
-Install using meteorite
+If you already use a bootstrap 3 package, remove it.
 
-` $ mrt add tap-theme `
 
-Include the editor template somewhere in your project
+Install using `meteor add tap:bootstrap-themer`
 
-` {{> TAPtheme}} `
+Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 
-If you already have bootstrap-3 in your package, remove it.
-
-` $ mrt remove bootstrap-3 `
 
 ## Features
 

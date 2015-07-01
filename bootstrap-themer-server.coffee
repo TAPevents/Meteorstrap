@@ -1,7 +1,7 @@
 fs = Npm.require 'fs'
 less = Npm.require 'less'
 
-assetPath = './assets/packages/tap-theme/lib/less/'
+assetPath = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_bootstrap-themer/lib/less/"
 bootstrapPath = assetPath+'bootstrap/'
 themesPath = assetPath+'themes/'
 variablesFile = 'variables.import.less'
@@ -14,7 +14,7 @@ parser = new less.Parser
   paths: [bootstrapPath]
   filename: rootFile
 
-ThemeCollection = new Meteor.Collection 'TAPtheme'
+ThemeCollection = new Meteor.Collection 'BootstrapThemer'
 
 # HELPERS
 
@@ -47,8 +47,8 @@ renderLess = (targetLess, addTheme) ->
   if addTheme
     lessBundle+= themeLess
 
-  # add font path specific to TAPtheme for glyphicons
-  lessBundle+= "@icon-font-path: \"/packages/tap-theme/lib/fonts/\";\n"
+  # add font path specific to BootstrapThemer for glyphicons
+  lessBundle+= "@icon-font-path: \"/packages/tap_bootstrap-themer/lib/fonts/\";\n"
 
   # add rule overrides
   lessBundle+= customVariables
@@ -109,7 +109,6 @@ getLessVars = (lessStr) ->
   cssLines = parsedLess().toCSS().split('\n').slice(1, -2)
   for line in cssLines
     keyVar = line.split(';')[0].split(':')
-    console.log keyVar
     parsedLessDefaults["@#{keyVar[0].trim()}"] = keyVar[1].trim()
 
   return parsedLessDefaults
@@ -141,7 +140,7 @@ Meteor.publish null, -> ThemeCollection.find()
 # TODO Convert these to observe
 
 Meteor.methods
-  'TAPtheme_updateLessVariable' : (key, val) ->
+  'BootstrapThemer_updateLessVariable' : (key, val) ->
     if val
       update = {$set: {}}
       update.$set["rule_overrides.#{key}"] = val
@@ -152,8 +151,8 @@ Meteor.methods
     ThemeCollection.update {_id:'main'}, update
     updateTheme()
 
-  'TAPtheme_updateCustomCSS' : updateTheme
+  'BootstrapThemer_updateCustomCSS' : updateTheme
 
-  'TAPtheme_switchTheme' : (theme) ->
+  'BootstrapThemer_switchTheme' : (theme) ->
     ThemeCollection.update 'main', {$set: {theme: theme}}
     updateTheme()

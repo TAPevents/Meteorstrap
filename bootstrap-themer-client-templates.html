@@ -1,8 +1,6 @@
-<template name="TAPtheme">
-  <div id="tap-theme">
-    {{#unless theme.availableThemes}}
-        <p>No Theme Collection found.</p>
-    {{else}}
+<template name="BootstrapThemer">
+  <div id="tap-bootstrap-themer">
+    {{#if theme.availableThemes}}
       <div class="container-fluid">
         <h1>Edit the text <a href="#">below</a> to update CSS reactively</h1>
         {{#with theme}}
@@ -20,6 +18,6 @@
         <h2>Custom Bootstrap Variables</h2>
       </div>
       {{> BootstrapMagic}}
-    {{/unless}}
+    {{/if}}
   </div>
 </template>
