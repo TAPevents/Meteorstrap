@@ -12,33 +12,27 @@ BootstrapThemer comes bundled with several [Bootswatch](https://github.com/thoma
 
 If you already use a bootstrap 3 package, remove it.
 
-
 Install using `meteor add tap:bootstrap-themer`
 
 Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 
-
 ## Features
 
-* Theme Presets and Switching - Includes all Bootswatch default Themes
-* Theme Creation and Saving
+* Theme Presets and Switching - Includes bootstswatch themes
 * On-the-fly css updates to all clients without refreshing their browser
 * Super-detailed tweaking without CSS knowledge using Bootsrap variables
 * Free-type custom CSS overrides
+* BootstrapMagic Integration
 
 ## Todo
 
+* fastrender
+* Custom Theme Creation and Saving
+* Mutliple themes for one project - eventual integration with orbit routes
 * Security for updating themes (use collection-hooks on server instead of methods, access control with regualr publish/subscribe)
-* Bootstrap Magic Integration
 * Font Uploads? TAPmedia integration
-* Glyphicons & FontAwesome Support
+* FontAwesome Support
 * More themes
-* Editor UI Improvements
-  * Organized variable editor (into 'Simple', 'Advanced')
-  * Controls for color picker, font dropdown, etc.
-  * Create and Save Custom Themes
-* Change delivery method -- Use JSON/AJAX?
-* Other Optimisations
 
 ## License
 
