@@ -18,7 +18,7 @@ Package.on_use(function (api) {
 
   api.use([
     'templating',
-    'hitchcott:bootstrap-magic@0.1.0'
+    'tap:bootstrap-magic'
   ], ['client']);
 
   // i18n
