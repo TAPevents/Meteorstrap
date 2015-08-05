@@ -31,11 +31,13 @@ renderLess = (targetLess, addTheme) ->
 
   if addTheme
     themeName = ThemeCollection.findOne('main').theme
-    themeLess = """
-    // THEME: #{themeName}
-    """
+    themeLess = ""
     if themeName and themeName isnt 'null'
-        # theme less
+        # add theme less
+        themeLess+= """
+        // THEME: #{themeName}
+
+        """
         themeLess+= fs.readFileSync "#{themesPath}#{themeName}/variables.less", 'utf8'
         themeLess+= fs.readFileSync "#{themesPath}#{themeName}/bootswatch.less", 'utf8'
 
