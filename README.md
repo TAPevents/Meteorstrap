@@ -22,17 +22,28 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 * On-the-fly css updates to all clients without refreshing their browser
 * Super-detailed tweaking without CSS knowledge using Bootsrap variables
 * Free-type custom CSS overrides
-* BootstrapMagic Integration
+* BootstrapMagic+ Theme Editor
 
 ## Todo
 
-* fastrender
-* Custom Theme Creation and Saving
-* Mutliple themes for one project - eventual integration with orbit routes
-* Security for updating themes (use collection-hooks on server instead of methods, access control with regualr publish/subscribe)
-* Font Uploads? TAPmedia integration
-* FontAwesome Support
-* More themes
+
+```
+- Custom Theme Creation and Saving
+  - 'Themes' collection
+  - Themes CRUD
+  - Ability to 'clone' with custom vars
+  - On seeding, parse themes css vars, insert them into db as themes with fields:
+    - bootswatch
+    - defaultVars
+    - customCss
+    - overrideVars
+- FastRender integration
+- IronRouter integration (route-based themes)
+- Security for updating themes (use collection-hooks on server instead of methods, access control with regualr publish/subscribe)
+- Font Uploads - TAPmedia integration
+- FontAwesome Support
+- Export bootswatch file
+```
 
 ## License
 
