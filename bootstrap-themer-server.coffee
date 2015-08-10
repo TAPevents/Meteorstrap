@@ -1,5 +1,6 @@
 fs = Npm.require 'fs'
 less = Npm.require 'less'
+crypto = Npm.require 'crypto'
 
 assetPath = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_bootstrap-themer/lib/less/"
 bootstrapPath = assetPath+'bootstrap/'
@@ -15,8 +16,49 @@ parser = new less.Parser
   filename: rootFile
 
 ThemeCollection = new Meteor.Collection 'BootstrapThemer'
+Themes = new Meteor.Collection 'BootstrapThemerThemes'
 
-# HELPERS
+Meteor.startup ->
+  # check for new themes
+  newThemes = 0
+
+  # insert the vanilla bootstrap theme if there are none
+  if Themes.find().count() is 0
+    newThemes++
+    Themes.insert
+      _id: 'vanilla'
+      name: 'Vanilla Bootstrap'
+      defaults: {}
+      less: ''
+      checksum: crypto.createHash('md5').update('').digest("hex")
+      predefined: true
+
+  for themeName in fs.readdirSync themesPath
+    # only add folders
+    if fs.lstatSync(themesPath+themeName).isDirectory()
+      thisTheme = {name: themeName}
+      for file in fs.readdirSync themesPath+themeName
+        thisTheme[file] = fs.readFileSync("#{themesPath}#{themeName}/#{file}").toString()
+
+      checksum = crypto.createHash('md5').update(thisTheme['bootswatch.less'] + thisTheme['variables.less']).digest("hex")
+      # use a checksum to efficiently update only when theme has changed
+      unless Themes.findOne({_id: themeName, checksum: checksum})
+        newThemes++
+        # new/updated theme found, let's update it
+        parsedLessDefaults = {}
+        for line in thisTheme['variables.less'].split('\n') when line.indexOf("@") is 0
+          keyVar = line.trim().split(';')[0].split(':')
+          parsedLessDefaults["#{keyVar[0].trim()}"] = keyVar[1].trim()
+
+        Themes.upsert _id: themeName,
+          name: themeName
+          defaults: parsedLessDefaults
+          less: thisTheme['bootswatch.less']
+          checksum: checksum
+          predefined: true
+
+  if newThemes
+    console.log "tap:themer just installed/updated #{newThemes} themes! 😎"
 
 renderLess = (targetLess, addTheme) ->
 
@@ -90,6 +132,7 @@ getThemes = ->
     $set:
       availableThemes: themes
 
+# TODO remove getLessVars after managed_themes, do clientside
 
 getLessVars = (lessStr) ->
   # get the computed CSS, so colorpicker works
