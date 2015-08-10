@@ -31,6 +31,7 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 - Custom Theme Creation and Saving + Routes
 
   - 'BootstrapThemes' collection
+
     - Parse all folders in /less/themes upon startup
       - Checksum the files, to see if the theme exists
       - if not, upsert:
@@ -38,20 +39,11 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
         _id: 'theme_name'
         checksum: 'md5 of bootswatch.less + variables.less'
         defaults: {defualt_vars}
+        overrides: {override_vars}
+        bootswatch: ''
 
-  - 'BootstrapRoutes' collection
 
-    _id: 'main'
-    theme: 'theme_name'
-    ruleOverrides: Obj
-    customLess: String
-    compiledCss: String
-
-    - Seed with default bootstrap if it doesn't exist
-
-  - Add a method setting theme
-
-  BootstrapThemer.setTheme 'myThemeName'
+  BootstrapThemer.setDefaultTheme 'myThemeName' (on serverside)
 
   - Themes CRUD
   - Ability to 'clone' with custom vars (new theme)
@@ -63,6 +55,7 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 - Font Uploads - TAPmedia integration
 - FontAwesome Support
 - Export bootswatch file
+- i18n
 ```
 
 ## License

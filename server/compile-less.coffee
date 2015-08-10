@@ -1,64 +1,23 @@
 fs = Npm.require 'fs'
 less = Npm.require 'less'
-crypto = Npm.require 'crypto'
 
-assetPath = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_bootstrap-themer/lib/less/"
-bootstrapPath = assetPath+'bootstrap/'
-themesPath = assetPath+'themes/'
-variablesFile = 'variables.import.less'
-rootFile = 'bootstrap.import.less'
-# read once, keep in memory for future use
-originalVariables = fs.readFileSync "#{bootstrapPath}#{variablesFile}", 'utf8'
-bootstrapLESS = fs.readFileSync "#{bootstrapPath}#{rootFile}", 'utf8'
+# coffeescript imports
+bootstrapPath = share.bootstrapPath
+themesPath = share.themesPath
+rootFile = share.bootstrapBase
+variablesFile = share.bootstrapVariables
 
+# initialize less parser
 parser = new less.Parser
-  paths: [bootstrapPath]
+  paths: [bootstrapPath] # include all bootstrap files
   filename: rootFile
 
+# read bootstrap variables once, keep in memory for future compilation.
+# is this efficient?
+originalVariables = fs.readFileSync "#{bootstrapPath}/#{variablesFile}", 'utf8'
+bootstrapLESS = fs.readFileSync "#{bootstrapPath}/#{rootFile}", 'utf8'
+
 ThemeCollection = new Meteor.Collection 'BootstrapThemer'
-Themes = new Meteor.Collection 'BootstrapThemerThemes'
-
-Meteor.startup ->
-  # check for new themes
-  newThemes = 0
-
-  # insert the vanilla bootstrap theme if there are none
-  if Themes.find().count() is 0
-    newThemes++
-    Themes.insert
-      _id: 'vanilla'
-      name: 'Vanilla Bootstrap'
-      defaults: {}
-      less: ''
-      checksum: crypto.createHash('md5').update('').digest("hex")
-      predefined: true
-
-  for themeName in fs.readdirSync themesPath
-    # only add folders
-    if fs.lstatSync(themesPath+themeName).isDirectory()
-      thisTheme = {name: themeName}
-      for file in fs.readdirSync themesPath+themeName
-        thisTheme[file] = fs.readFileSync("#{themesPath}#{themeName}/#{file}").toString()
-
-      checksum = crypto.createHash('md5').update(thisTheme['bootswatch.less'] + thisTheme['variables.less']).digest("hex")
-      # use a checksum to efficiently update only when theme has changed
-      unless Themes.findOne({_id: themeName, checksum: checksum})
-        newThemes++
-        # new/updated theme found, let's update it
-        parsedLessDefaults = {}
-        for line in thisTheme['variables.less'].split('\n') when line.indexOf("@") is 0
-          keyVar = line.trim().split(';')[0].split(':')
-          parsedLessDefaults["#{keyVar[0].trim()}"] = keyVar[1].trim()
-
-        Themes.upsert _id: themeName,
-          name: themeName
-          defaults: parsedLessDefaults
-          less: thisTheme['bootswatch.less']
-          checksum: checksum
-          predefined: true
-
-  if newThemes
-    console.log "tap:themer just installed/updated #{newThemes} themes! 😎"
 
 renderLess = (targetLess, addTheme) ->
 
@@ -80,8 +39,8 @@ renderLess = (targetLess, addTheme) ->
         // THEME: #{themeName}
 
         """
-        themeLess+= fs.readFileSync "#{themesPath}#{themeName}/variables.less", 'utf8'
-        themeLess+= fs.readFileSync "#{themesPath}#{themeName}/bootswatch.less", 'utf8'
+        themeLess+= fs.readFileSync "#{themesPath}/#{themeName}/variables.less", 'utf8'
+        themeLess+= fs.readFileSync "#{themesPath}/#{themeName}/bootswatch.less", 'utf8'
 
   lessBundle = ""
   # add default variables
@@ -125,7 +84,7 @@ getThemes = ->
   themes = ['null']
   for themeFolder in fs.readdirSync themesPath
     # only add folders
-    if fs.lstatSync(themesPath+themeFolder).isDirectory()
+    if fs.lstatSync("#{themesPath}/#{themeFolder}").isDirectory()
       themes.push themeFolder
 
   ThemeCollection.update 'main',
@@ -183,7 +142,6 @@ Meteor.publish null, -> ThemeCollection.find()
 
 
 # TODO Convert these to observers(?)
-
 Meteor.methods
   'BootstrapThemer_updateLessVariable' : (key, val) ->
     if val

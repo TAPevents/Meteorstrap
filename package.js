@@ -26,7 +26,7 @@ Package.on_use(function (api) {
 
   // Bootstrap Server-side assets
   api.add_files([
-    // import variables
+    // vanilla boostrap variables
     'lib/less/bootstrap/alerts.import.less',
     'lib/less/bootstrap/badges.import.less',
     'lib/less/bootstrap/bootstrap.import.less',
@@ -67,7 +67,7 @@ Package.on_use(function (api) {
     'lib/less/bootstrap/utilities.import.less',
     'lib/less/bootstrap/variables.import.less',
     'lib/less/bootstrap/wells.import.less',
-    // import themes
+    // bootswatch themes
     'lib/less/themes/amelia/bootswatch.less',
     'lib/less/themes/amelia/variables.less',
     'lib/less/themes/cerulean/bootswatch.less',
@@ -108,15 +108,24 @@ Package.on_use(function (api) {
   ],"client");
 
 
-  // Package files
+  // Actual package logic
+
   api.add_files([
-    'bootstrap-themer-server.coffee'
+    'server/main.coffee',
+    'server/install-predefined-themes.coffee',
+    'server/compile-less.coffee'
   ],"server");
 
   api.add_files([
-    'bootstrap-themer-client-templates.html',
-    'bootstrap-themer-client.coffee',
-    // i18n files
+    'client/bootstrap-themer.html',
+    'client/bootstrap-themer-client.coffee',
+  ],"client");
+
+
+
+
+  // i18n
+  api.add_files([
     'i18n/en.i18n.json'
   ],"client");
 
