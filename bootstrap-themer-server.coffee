@@ -61,6 +61,8 @@ renderLess = (targetLess, addTheme) ->
   try
     parsed = Meteor._wrapAsync (done) ->
       parser.parse lessBundle, done
+  catch err
+    console.log 'Less parse error', err
 
   return parsed().toCSS({compress:true})
 
@@ -137,9 +139,7 @@ getThemes()
 Meteor.publish null, -> ThemeCollection.find()
 
 
-
-
-# TODO Convert these to observe
+# TODO Convert these to observers(?)
 
 Meteor.methods
   'BootstrapThemer_updateLessVariable' : (key, val) ->

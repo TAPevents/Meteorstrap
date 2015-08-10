@@ -120,7 +120,4 @@ Package.on_use(function (api) {
     'i18n/en.i18n.json'
   ],"client");
 
-
-
-
 });

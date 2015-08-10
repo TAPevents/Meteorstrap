@@ -10,6 +10,7 @@ Meteor.startup ->
   .prepend $bootstrapCSS
   .append $customCSS
 
+  # update <style> tags in <head> reactively
   Deps.autorun ->
     $bootstrapCSS.html BootstrapThemer().bootstrapCSS
     $customCSS.html BootstrapThemer().customCSS
