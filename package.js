@@ -13,11 +13,20 @@ Package.on_use(function (api) {
 
   api.use([
     'coffeescript',
+    'underscore',
     'tap:i18n@1.5.0'
   ], ['client','server']);
 
   api.use([
+    'cfs:micro-queue',
+    'cfs:power-queue@0.9.11'
+  ], 'server')
+
+  api.use([
+    'less', // just for internal styling!
     'templating',
+    'tracker',
+    'reactive-var',
     'tap:bootstrap-magic'
   ], ['client']);
 
@@ -109,16 +118,21 @@ Package.on_use(function (api) {
 
 
   // Actual package logic
+  api.add_files([
+    'collections.coffee'
+  ],["server","client"]);
 
   api.add_files([
     'server/main.coffee',
     'server/install-predefined-themes.coffee',
-    'server/compile-less.coffee'
+    'server/less-compiler.coffee'
   ],"server");
 
   api.add_files([
-    'client/bootstrap-themer.html',
-    'client/bootstrap-themer-client.coffee',
+    'client/editor.html',
+    'client/editor.less',
+    'client/editor.coffee',
+    'client/injector.coffee'
   ],"client");
 
 

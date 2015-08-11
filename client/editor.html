@@ -1,0 +1,32 @@
+<template name="BootstrapThemer">
+  {{#if Template.subscriptionsReady}}
+    {{> _BootstrapThemer}}
+  {{else}}
+    <p>Loading...</p>
+  {{/if}}
+</template>
+
+<template name="_BootstrapThemer">
+  <div class="bootstrap-themer">
+    <div class="container-fluid">
+      <select class='theme-selector form-control'>
+        {{#each availableThemes}}
+          <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      {{#with currentTheme}}
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Custom LESS</label>
+            <textarea class='form-control css-box' name='customLess'>{{customLess}}</textarea>
+          </div>
+          <div class="col-sm-6">
+            <label>Theme LESS</label>
+            <textarea class='form-control css-box' name='bootswatch' disabled="{{predefined}}">{{bootswatch}}</textarea>
+          </div>
+        </div>
+      {{/with}}
+    </div>
+    {{> BootstrapMagic}}
+  </div>
+</template>

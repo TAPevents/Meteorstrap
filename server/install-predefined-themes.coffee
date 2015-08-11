@@ -2,7 +2,7 @@ fs = Npm.require 'fs'
 crypto = Npm.require 'crypto'
 
 # coffeescript import
-Themes = share.Themes
+Themes = BootstrapThemer.Themes
 themesPath = share.themesPath
 
 Meteor.startup ->
@@ -40,7 +40,7 @@ Meteor.startup ->
           parsedLessDefaults["#{keyVar[0].trim()}"] = keyVar[1].trim()
         # upsert (so we insert if new, update if a checksum is changed)
         Themes.upsert _id: themeName,
-          name: themeName
+          name: themeName.charAt(0).toUpperCase() + themeName.slice(1)
           defaults: parsedLessDefaults
           bootswatch: thisTheme['bootswatch.less']
           checksum: checksum
