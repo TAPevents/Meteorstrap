@@ -7,6 +7,7 @@ Template.BootstrapThemer.onCreated -> @subscribe 'BootstrapThemerEditor'
 Template._BootstrapThemer.onCreated ->
   @autorun ->
     BootstrapMagic.setDefaults getCurrentTheme().defaults
+    BootstrapMagic.setOverrides getCurrentTheme().overrides
 
 Template._BootstrapThemer.helpers
   availableThemes: -> Themes.find()

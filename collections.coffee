@@ -8,6 +8,7 @@ if Meteor.isServer
   # TODO use `check`
   adminFields =
     defaults: 1
+    overrides: 1
     name: 1
     customLess: 1
     bootswatch: 1
