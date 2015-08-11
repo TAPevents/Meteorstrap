@@ -16,6 +16,8 @@ Template._BootstrapThemer.helpers
 Template._BootstrapThemer.events
   'change .theme-selector' : (e) ->
     currentTheme.set e.currentTarget.value
+    # TODO remove this
+    BootstrapThemer.enabledTheme.set e.currentTarget.value
 
   'change .css-box' : (e) ->
     update = {}
