@@ -22,33 +22,15 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 * On-the-fly css updates to all clients without refreshing their browser
 * Super-detailed tweaking without CSS knowledge using Bootsrap variables
 * Free-type custom CSS overrides
-* BootstrapMagic+ Theme Editor
+* BootstrapMagic+ Theme Editor (with enhanced UI)
 
 ## Todo
 
 
 ```
 - Custom Theme Creation and Saving + Routes
-
-  - 'BootstrapThemes' collection
-
-    - Parse all folders in /less/themes upon startup
-      - Checksum the files, to see if the theme exists
-      - if not, upsert:
-
-        _id: 'theme_name'
-        checksum: 'md5 of bootswatch.less + variables.less'
-        defaults: {defualt_vars}
-        overrides: {override_vars}
-        bootswatch: ''
-
-
-  BootstrapThemer.setDefaultTheme 'myThemeName' (on serverside)
-
-  - Themes CRUD
-  - Ability to 'clone' with custom vars (new theme)
-
-
+- Themes CRUD
+- Ability to 'clone' with custom vars (new theme)
 - FastRender integration
 - IronRouter integration (route-based themes)
 - Security for updating themes (use collection-hooks on server instead of methods, access control with regualr publish/subscribe)
