@@ -54,7 +54,7 @@ Meteor.startup ->
 
     # passing a theme without assetPath, assume it's already formatted
     # don't update if the checksum is the same
-    else if !predefinedTheme.checksum? or !Themes.findOne({_id: predefinedTheme._id, checksum: predefinedTheme.checksum})
+    else if !(predefinedTheme.checksum and Themes.findOne({_id: predefinedTheme._id, checksum: predefinedTheme.checksum}))
       # assume variables and theme are correct already
       newThemes++
       Themes.upsert _id: predefinedTheme._id,
@@ -62,7 +62,9 @@ Meteor.startup ->
         author: predefinedTheme.author
         defaults: predefinedTheme.defaults
         bootswatch: predefinedTheme.bootswatch
+        checksum: predefinedTheme.checksum
         predefined: true
+
 
 
   if newThemes

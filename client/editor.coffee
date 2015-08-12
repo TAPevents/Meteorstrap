@@ -7,7 +7,6 @@ Template.BootstrapThemer.onCreated -> @subscribe 'BootstrapThemerEditor'
 Template._BootstrapThemer.onCreated ->
   @autorun ->
     thisTheme = getCurrentTheme()
-    console.log 'setting overrides', thisTheme._id, thisTheme.overrides
     BootstrapMagic.setDefaults thisTheme.defaults
     BootstrapMagic.setOverrides thisTheme.overrides || {}
     # TODO remove this:
