@@ -1,12 +1,12 @@
 fs = Npm.require 'fs'
 less = Npm.require 'less'
 
-# imports
 Themes = BootstrapThemer.Themes
-bootstrapPath = share.bootstrapPath
-themesPath = share.themesPath
-rootFile = share.bootstrapBase
-variablesFile = share.bootstrapVariables
+assetsRoot = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_bootstrap-themer/lib/less"
+themesPath = "#{assetsRoot}/themes"
+bootstrapPath = "#{assetsRoot}/bootstrap"
+rootFile = "bootstrap.import.less"
+variablesFile = "variables.import.less"
 
 # initialize less parser
 parser = new less.Parser

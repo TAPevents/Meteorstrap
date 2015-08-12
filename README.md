@@ -29,12 +29,11 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 
 ```
 For v1.0
-- Custom Theme Creation / Removing (create a new theme by cloning an old theme, use the overrides as defaults, move CustomCSS to end of bootswatch)
+- 'Register Theme' method, rather than bundling all themes, create seperate package for tap:bootstrap-themer-bootswatch-themes
 - FastRender + IronRouter integration (route-based themes)
   - Default theme
   - Set theme for all /admin/ routes, e.g. w/ fastrender
 - Security for updating themes (is this 'Solved' with allow/deny?)
-- 'Register Theme' method, rather than bundling all themes, create seperate package for bootswatch themes
 - Basic unit tests
 - Documentation
 

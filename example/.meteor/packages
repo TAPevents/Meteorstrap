@@ -6,6 +6,5 @@
 
 meteor-platform
 insecure
-# TODO remove bootstrap
-twbs:bootstrap
 tap:bootstrap-themer
+tap:bootstrap-themer-bootswatch-themes

@@ -76,36 +76,7 @@ Package.on_use(function (api) {
     'lib/less/bootstrap/type.import.less',
     'lib/less/bootstrap/utilities.import.less',
     'lib/less/bootstrap/variables.import.less',
-    'lib/less/bootstrap/wells.import.less',
-    // bootswatch themes
-    'lib/less/themes/amelia/bootswatch.less',
-    'lib/less/themes/amelia/variables.less',
-    'lib/less/themes/cerulean/bootswatch.less',
-    'lib/less/themes/cerulean/variables.less',
-    'lib/less/themes/cosmo/bootswatch.less',
-    'lib/less/themes/cosmo/variables.less',
-    'lib/less/themes/cyborg/bootswatch.less',
-    'lib/less/themes/cyborg/variables.less',
-    'lib/less/themes/darkly/bootswatch.less',
-    'lib/less/themes/darkly/variables.less',
-    'lib/less/themes/flatly/bootswatch.less',
-    'lib/less/themes/flatly/variables.less',
-    'lib/less/themes/lumen/bootswatch.less',
-    'lib/less/themes/lumen/variables.less',
-    'lib/less/themes/readable/bootswatch.less',
-    'lib/less/themes/readable/variables.less',
-    'lib/less/themes/simplex/bootswatch.less',
-    'lib/less/themes/simplex/variables.less',
-    'lib/less/themes/slate/bootswatch.less',
-    'lib/less/themes/slate/variables.less',
-    'lib/less/themes/spacelab/bootswatch.less',
-    'lib/less/themes/spacelab/variables.less',
-    'lib/less/themes/superhero/bootswatch.less',
-    'lib/less/themes/superhero/variables.less',
-    'lib/less/themes/united/bootswatch.less',
-    'lib/less/themes/united/variables.less',
-    'lib/less/themes/yeti/bootswatch.less',
-    'lib/less/themes/yeti/variables.less'
+    'lib/less/bootstrap/wells.import.less'
   ],"server");
 
   // Bootstrap Client-side Assets
@@ -124,7 +95,6 @@ Package.on_use(function (api) {
   ],["server","client"]);
 
   api.add_files([
-    'server/main.coffee',
     'server/install-predefined-themes.coffee',
     'server/less-compiler.coffee'
   ],"server");

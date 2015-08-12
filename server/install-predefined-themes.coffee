@@ -1,52 +1,69 @@
+@BootstrapThemer = @BootstrapThemer || {}
+
 fs = Npm.require 'fs'
 crypto = Npm.require 'crypto'
 
 # coffeescript import
 Themes = BootstrapThemer.Themes
-themesPath = share.themesPath
+
+predefinedThemes = []
+
+BootstrapThemer.registerPredefinedTheme = (theme) ->
+  predefinedThemes.push theme
+
+# make vanilla the only default theme
+BootstrapThemer.registerPredefinedTheme
+  defaults: {}
+  bootswatch: ''
+  _id: 'vanilla'
+  name: 'Vanilla Bootstrap'
+  author: 'Twitter'
+  checksum: crypto.createHash('md5').update('').digest("hex") # empty checksum
 
 Meteor.startup ->
   # check for new/updated themes on startup
   newThemes = 0
+  # loop through registered predefined themes
+  for predefinedTheme in predefinedThemes
+    # resolve variables if assetPath is passed
+    if predefinedTheme.assetPath
+      # check the assets path
+      if fs.lstatSync("#{predefinedTheme.assetPath}").isDirectory()
+        thisTheme = {}
+        # get the theme less data
+        for file in fs.readdirSync "#{predefinedTheme.assetPath}"
+          thisTheme[file] = fs.readFileSync("#{predefinedTheme.assetPath}/#{file}").toString()
+        # use a checksum to efficiently update only when theme has changed
+        checksum = crypto.createHash('md5').update(thisTheme['bootswatch.less'] + thisTheme['variables.less']).digest("hex")
+        unless Themes.findOne({_id: predefinedTheme._id, checksum: checksum})
+          # new/updated theme found, let's update it
+          parsedLessDefaults = {}
+          for line in thisTheme['variables.less'].split('\n') when line.indexOf("@") is 0
+            keyVar = line.trim().split(';')[0].split(':')
+            parsedLessDefaults["#{keyVar[0].trim()}"] = keyVar[1].trim()
 
-  # insert the vanilla bootstrap theme if there are none
-  if Themes.find().count() is 0
-    newThemes++
-    Themes.insert
-      # this is an 'empty' theme, so it'll just look like regular bootstrap
-      defaults: {}
-      bootswatch: ''
-      _id: 'vanilla'
-      name: 'Vanilla Bootstrap'
-      author: 'Twitter'
-      checksum: crypto.createHash('md5').update('').digest("hex") # empty checksum
-      predefined: true # predefined means we've added it rather than the user
+          # upsert (so we insert if new, update if a checksum is changed)
+          newThemes++
+          Themes.upsert _id: predefinedTheme._id,
+            name: predefinedTheme.name
+            author: predefinedTheme.author
+            defaults: parsedLessDefaults
+            bootswatch: thisTheme['bootswatch.less']
+            checksum: checksum
+            predefined: true
 
-  # loop through predefined themes
-  for themeName in fs.readdirSync themesPath
-    # only check folders folders
-    if fs.lstatSync("#{themesPath}/#{themeName}").isDirectory()
-      thisTheme = {}
-      # get the theme less data
-      for file in fs.readdirSync "#{themesPath}/#{themeName}"
-        thisTheme[file] = fs.readFileSync("#{themesPath}/#{themeName}/#{file}").toString()
-      # use a checksum to efficiently update only when theme has changed
-      checksum = crypto.createHash('md5').update(thisTheme['bootswatch.less'] + thisTheme['variables.less']).digest("hex")
-      unless Themes.findOne({_id: themeName, checksum: checksum})
-        newThemes++
-        # new/updated theme found, let's update it
-        parsedLessDefaults = {}
-        for line in thisTheme['variables.less'].split('\n') when line.indexOf("@") is 0
-          keyVar = line.trim().split(';')[0].split(':')
-          parsedLessDefaults["#{keyVar[0].trim()}"] = keyVar[1].trim()
-        # upsert (so we insert if new, update if a checksum is changed)
-        Themes.upsert _id: themeName,
-          name: themeName.charAt(0).toUpperCase() + themeName.slice(1)
-          author: 'Bootswatch'
-          defaults: parsedLessDefaults
-          bootswatch: thisTheme['bootswatch.less']
-          checksum: checksum
-          predefined: true
+    # passing a theme without assetPath, assume it's already formatted
+    # don't update if the checksum is the same
+    else if !predefinedTheme.checksum? or !Themes.findOne({_id: predefinedTheme._id, checksum: predefinedTheme.checksum})
+      # assume variables and theme are correct already
+      newThemes++
+      Themes.upsert _id: predefinedTheme._id,
+        name: predefinedTheme.name
+        author: predefinedTheme.author
+        defaults: predefinedTheme.defaults
+        bootswatch: predefinedTheme.bootswatch
+        predefined: true
+
 
   if newThemes
     # user feedback
