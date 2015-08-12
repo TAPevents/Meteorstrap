@@ -28,16 +28,25 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 
 
 ```
-- Custom Theme Creation and Saving + Routes
-- Themes CRUD
-- Ability to 'clone' with custom vars (new theme)
-- FastRender integration
-- IronRouter integration (route-based themes)
-- Security for updating themes (use collection-hooks on server instead of methods, access control with regualr publish/subscribe)
-- Font Uploads - TAPmedia integration
-- FontAwesome Support
-- Export bootswatch file
-- i18n
+For v1.0
+- Custom Theme Creation / Removing (create a new theme by cloning an old theme, use the overrides as defaults, move CustomCSS to end of bootswatch)
+- FastRender + IronRouter integration (route-based themes)
+  - Default theme
+  - Set theme for all /admin/ routes, e.g. w/ fastrender
+- Security for updating themes (is this 'Solved' with allow/deny?)
+- 'Register Theme' method, rather than bundling all themes, create seperate package for bootswatch themes
+- Basic unit tests
+- Documentation
+
+For v1.1
+- TAPmedia integration + UI For:
+  - Font uploads
+  - Backgroud images
+  - Icon packs?
+- Full i18n
+
+After v1.1 / Icebucket
+- Export bootswatch / less variables file
 ```
 
 ## License
@@ -47,9 +56,8 @@ MIT 2014
 ## Credits / Packages Used
 
 * Bootstrap
-* Bootstrap Magic
+* BootstrapMagic
 * Bootswatch
 * LESS Compiler
-* Collection Hooks
 
 Created by [Chris Hitchcott](http://github.com/hitchcott) for [TAPevents](http://tapevents.com).
