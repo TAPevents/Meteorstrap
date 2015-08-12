@@ -18,6 +18,7 @@ Meteor.startup ->
       bootswatch: ''
       _id: 'vanilla'
       name: 'Vanilla Bootstrap'
+      author: 'Twitter'
       checksum: crypto.createHash('md5').update('').digest("hex") # empty checksum
       predefined: true # predefined means we've added it rather than the user
 
@@ -41,6 +42,7 @@ Meteor.startup ->
         # upsert (so we insert if new, update if a checksum is changed)
         Themes.upsert _id: themeName,
           name: themeName.charAt(0).toUpperCase() + themeName.slice(1)
+          author: 'Bootswatch'
           defaults: parsedLessDefaults
           bootswatch: thisTheme['bootswatch.less']
           checksum: checksum

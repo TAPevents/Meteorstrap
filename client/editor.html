@@ -9,11 +9,40 @@
 <template name="_BootstrapThemer">
   <div class="bootstrap-themer">
     <div class="container-fluid">
-      <select class='theme-selector form-control'>
-        {{#each availableThemes}}
-          <option value="{{_id}}">{{name}}</option>
-        {{/each}}
-      </select>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+            Editing: <b>{{currentTheme.name}}{{#if canReset}}<i> - edited</i>{{/if}}</b> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Tools</li>
+            <li><a class='clone-theme' href="#">
+              <i class='glyphicon glyphicon-duplicate'></i> Clone Theme
+            </a></li>
+
+            {{#if canReset}}
+              <li><a class='reset-theme' href="#">
+                <i class='glyphicon glyphicon-repeat'></i> Reset Theme
+              </a></li>
+            {{/if}}
+            {{#unless currentTheme.predefined}}
+            <li><a class='delete-theme' href="#">
+              <i class='glyphicon glyphicon-trash'></i> Delete Theme
+            </a></li>
+            {{/unless}}
+            <li class="divider"></li>
+            <li class="dropdown-header">Change Theme</li>
+            {{#each availableThemes}}
+              <li><a class='change-theme' href="#">
+                <span title='{{#if predefined}}This is a predefined theme which cannot be deleted{{else}}This is a user defined theme{{/if}}'>
+                  {{#unless predefined}}<i class='glyphicon glyphicon-user'></i> {{/unless}}{{name}} <small class='text-muted'>by {{author}}</small>
+                </span>
+              </a></li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
       {{#with currentTheme}}
         <div class="row">
           <div class="col-sm-6">
@@ -22,7 +51,7 @@
           </div>
           <div class="col-sm-6">
             <label>Theme LESS</label>
-            <textarea class='form-control css-box' name='bootswatch' disabled="{{predefined}}">{{bootswatch}}</textarea>
+            <textarea class='form-control css-box' name='bootswatch' disabled="true">{{bootswatch}}</textarea>
           </div>
         </div>
       {{/with}}
@@ -30,3 +59,33 @@
     {{> BootstrapMagic}}
   </div>
 </template>
+
+<template name="BootstrapThemerCloneModal">
+  <form>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      <h4 class="modal-title">Clone Theme</h4>
+    </div>
+    <div class="modal-body">
+      <p>This will create a new theme with the base properties copied from <b>{{theme.name}}</b></p>
+      <p>Please enter details for your new theme.</p>
+      <div class="row">
+        <div class="col-xs-6">
+          <input type="text" class="input-block form-control" name="name" placeholder="Theme Name">
+        </div>
+        <div class="col-xs-6">
+          <input type="text" class="input-block form-control" name="author" placeholder="Author">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+      <button type="submit" class="btn btn-success confirm-clone">Clone Theme</button>
+    </div>
+  </form>
+</template>
+
+
+
+
+

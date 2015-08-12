@@ -48,6 +48,9 @@ renderTheme = (themeId) ->
 
   return parsed().toCSS({compress:true})
 
+
+# Use cfs:powerer-queue to handle throttling etc.
+
 queue = new PowerQueue()
 
 updateTheme = (_id) ->
@@ -56,12 +59,13 @@ updateTheme = (_id) ->
       Themes.update _id, $set: compiledCss: renderTheme _id
     done()
 
-
 Themes.find().observeChanges
   added: (_id, doc) ->
     # on startup, compile any themes that don't have compiled CSS
-    updateTheme(_id) unless doc.compiledCss
+    unless doc.compiledCss
+      updateTheme(_id)
 
   changed: (_id, doc) ->
     # whenever a theme changes, re-render it
-    updateTheme(_id) if doc.overrides? or doc.bootswatch? or doc.customLess?
+    if doc.overrides? or doc.bootswatch? or doc.customLess?
+      updateTheme(_id)

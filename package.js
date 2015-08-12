@@ -27,6 +27,7 @@ Package.on_use(function (api) {
     'templating',
     'tracker',
     'reactive-var',
+    'hitchcott:ez-modal',
     'tap:bootstrap-magic'
   ], ['client']);
 
