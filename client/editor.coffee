@@ -16,7 +16,7 @@ Template._BootstrapThemer.onRendered -> @$('.dropdown-toggle').dropdown()
 
 Template._BootstrapThemer.helpers
   currentTheme: getCurrentTheme
-  availableThemes: -> Themes.find()
+  availableThemes: -> Themes.find({},{sort:{name:1}})
   canReset: ->
     theTheme = getCurrentTheme()
     if theTheme.customLess
