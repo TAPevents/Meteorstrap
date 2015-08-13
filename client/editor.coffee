@@ -1,10 +1,11 @@
 Themes = BootstrapThemer.Themes
-currentTheme = new ReactiveVar 'vanilla'
+currentTheme = new ReactiveVar()
 getCurrentTheme = -> Themes.findOne(currentTheme.get())
 
 Template.BootstrapThemer.onCreated -> @subscribe 'BootstrapThemerEditor'
 
 Template._BootstrapThemer.onCreated ->
+  currentTheme.set Themes.findOne({default:true})._id
   @autorun ->
     thisTheme = getCurrentTheme()
     BootstrapMagic.setDefaults thisTheme.defaults
