@@ -30,6 +30,11 @@
               <i class='glyphicon glyphicon-trash'></i> Delete Theme
             </a></li>
             {{/unless}}
+
+            <li><a class='make-default' href="#">
+              <i class='glyphicon glyphicon-star{{#unless currentTheme.default}}-empty{{/unless}}'></i> Make Default
+            </a></li>
+
             <li class="divider"></li>
             <li class="dropdown-header">Change Theme</li>
             {{#each availableThemes}}

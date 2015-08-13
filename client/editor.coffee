@@ -35,6 +35,14 @@ Template._BootstrapThemer.events
         theme: getCurrentTheme
       template: 'BootstrapThemerCloneModal'
 
+  'click .make-default' : ->
+    # make others not default
+    for theme in Themes.find().fetch()
+      if theme.default
+        Themes.update theme._id, $unset: default: 1
+    # make this default
+    Themes.update getCurrentTheme()._id, $set: default: true
+
   'click .delete-theme' : ->
     themeToDelete = getCurrentTheme()
     EZModal

@@ -5,8 +5,6 @@ Themes = BootstrapThemer.Themes
 enabledTheme = BootstrapThemer.enabledTheme = new ReactiveVar BootstrapThemer.defaultTheme()
 
 Meteor.startup ->
-  console.log 'started'
-
   # create style tag in head for injection
   $cssInjection = $("<style></style>").appendTo 'head'
 
