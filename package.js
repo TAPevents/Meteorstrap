@@ -14,6 +14,7 @@ Package.on_use(function (api) {
   api.use([
     'coffeescript',
     'underscore',
+    'meteorhacks:fast-render',
     'tap:i18n@1.5.0'
   ], ['client','server']);
 

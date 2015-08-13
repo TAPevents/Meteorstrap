@@ -1,14 +1,12 @@
-Router.configure
-  layoutTemplate: 'layout'
 
-Router.route '/', ->
-  @render 'welcome'
-, name: 'welcome'
+Router.plugin 'BootstrapThemer', preload: ['darkly']
 
-Router.route 'admin'
+Router.configure layoutTemplate: 'layout'
+Router.route '/', -> @render 'welcome'
+Router.route 'welcome'
 Router.route 'about'
 Router.route 'editor'
-
+Router.route 'admin', BootstrapThemer: 'darkly'
 
 if Meteor.isClient
   Template.navbar.helpers

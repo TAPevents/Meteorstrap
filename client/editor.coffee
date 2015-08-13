@@ -9,8 +9,6 @@ Template._BootstrapThemer.onCreated ->
     thisTheme = getCurrentTheme()
     BootstrapMagic.setDefaults thisTheme.defaults
     BootstrapMagic.setOverrides thisTheme.overrides || {}
-    # TODO remove this:
-    BootstrapThemer.enabledTheme.set thisTheme._id
 
 Template._BootstrapThemer.onRendered -> @$('.dropdown-toggle').dropdown()
 
