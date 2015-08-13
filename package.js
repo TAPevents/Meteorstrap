@@ -91,7 +91,8 @@ Package.on_use(function (api) {
 
   // Actual package logic
   api.add_files([
-    'collections.coffee'
+    'both/collections.coffee',
+    'both/router.coffee'
   ],["server","client"]);
 
   api.add_files([
