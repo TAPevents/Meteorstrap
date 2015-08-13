@@ -1,7 +1,66 @@
 <head>
-  <title>example</title>
+    <title>MeteorStrap</title>
 </head>
 
 <body>
-  {{> BootstrapThemer}}
+
 </body>
+
+<template name="layout">
+  <div class="container">
+    {{> navbar}}
+    {{> yield}}
+  </div>
+</template>
+
+
+<template name="editor">
+  {{> BootstrapThemer}}
+</template>
+
+
+<template name="welcome">
+  <div class="jumbotron">
+    <h1>Navbar example</h1>
+    <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    <p>
+      <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
+    </p>
+  </div>
+</template>
+
+<template name="about">
+  <h1>About</h1>
+  <p>Bootstrap Themer was created by TAPevents</p>
+</template>
+
+<template name="admin">
+  <h1>Admin</h1>
+  <p>This is just an example of a route with it's own theme</p>
+</template>
+
+
+<template name="navbar">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">MeteorStrap <small class='text-muted'>by TAPevents</small></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="{{activeRouteClass 'welcome'}}"><a href="{{pathFor 'welcome'}}">Home</a></li>
+          <li class="{{activeRouteClass 'about'}}"><a href="{{pathFor 'about'}}">About</a></li>
+          <li class="{{activeRouteClass 'admin'}}"><a href="{{pathFor 'admin'}}">Admin</a></li>
+          <li class="{{activeRouteClass 'editor'}}"><a href="{{pathFor 'editor'}}">Editor</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</template>

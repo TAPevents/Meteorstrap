@@ -6,5 +6,7 @@
 
 meteor-platform
 insecure
+coffeescript
 tap:bootstrap-themer
 tap:bootstrap-themer-bootswatch-themes
+iron:router
