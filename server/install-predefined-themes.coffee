@@ -70,3 +70,6 @@ Meteor.startup ->
   if newThemes
     # user feedback
     console.log "tap:themer just installed/updated #{newThemes} themes! 😎"
+    # check to see if we have any defaults set
+    unless Themes.findOne {default: true}
+      Themes.update 'vanilla', $set: default: true
