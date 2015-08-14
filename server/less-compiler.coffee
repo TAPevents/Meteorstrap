@@ -3,28 +3,18 @@ less = Npm.require 'less'
 
 Themes = BootstrapThemer.Themes
 assetsRoot = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_bootstrap-themer/lib/less"
-themesPath = "#{assetsRoot}/themes"
 bootstrapPath = "#{assetsRoot}/bootstrap"
 rootFile = "bootstrap.import.less"
-variablesFile = "variables.import.less"
 
-# initialize less parser
-parser = new less.Parser
-  paths: [bootstrapPath] # include all bootstrap files
-  filename: rootFile
-
-# read bootstrap variables once, keep in memory for future compilation. is this efficient?
-originalVariables = fs.readFileSync "#{bootstrapPath}/#{variablesFile}", 'utf8'
+# read bootstrap variables once, keep in memory for future compilation.
 bootstrapLESS = fs.readFileSync "#{bootstrapPath}/#{rootFile}", 'utf8'
 
 renderTheme = (themeId) ->
   thisTheme = Themes.findOne themeId
   # build the less file
   lessBundle = ""
-  # add default bootstrap less
+  # add default bootstrap less, which includes the variables
   lessBundle+= bootstrapLESS
-  # add default bootstrap variables
-  lessBundle+= originalVariables
   # add theme defaults
   for key, val of thisTheme.defaults || {}
     if val and val isnt ''
@@ -40,13 +30,18 @@ renderTheme = (themeId) ->
   # add custom less
   lessBundle+= thisTheme.customLess || ""
   # now try parsing it all
-  try
-    parsed = Meteor._wrapAsync (done) ->
-      parser.parse lessBundle, done
-  catch err
-    new Meteor.error "Less parse error: #{err}"
+  # console.log 'bundle', lessBundle
+  parsed = Meteor._wrapAsync (done) ->
+    less.render lessBundle,
+      paths: [bootstrapPath] # include all imports
+      compress: true
+    , (err, res) ->
+      if err
+        done err
+      else
+        done null, res.css
 
-  return parsed().toCSS({compress:true})
+  return parsed()
 
 
 # Use cfs:powerer-queue to handle throttling etc.
@@ -55,8 +50,8 @@ queue = new PowerQueue()
 
 updateTheme = (_id) ->
   queue.add (done) ->
-    try
-      Themes.update _id, $set: compiledCss: renderTheme _id
+    renderedCss = renderTheme _id
+    Themes.update _id, $set: compiledCss: renderedCss
     done()
 
 Themes.find().observeChanges

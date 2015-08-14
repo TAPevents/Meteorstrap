@@ -8,5 +8,5 @@ meteor-platform
 insecure
 coffeescript
 tap:bootstrap-themer
-tap:bootstrap-themer-bootswatch-themes
+#tap:bootstrap-themer-bootswatch-themes
 iron:router

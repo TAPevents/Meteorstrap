@@ -5,7 +5,7 @@ Package.describe({
   git:'https://github.com/TAPevents/bootstrap-themer'
 });
 
-Npm.depends({'less':'1.7.3'})
+Npm.depends({'less':'2.5.1'})
 
 Package.on_use(function (api) {
 
@@ -37,7 +37,38 @@ Package.on_use(function (api) {
 
   // Bootstrap Server-side assets
   api.add_files([
-    // vanilla boostrap variables
+    // boostrap mixins
+    'lib/less/bootstrap/mixins/alerts.import.less',
+    'lib/less/bootstrap/mixins/background-variant.import.less',
+    'lib/less/bootstrap/mixins/border-radius.import.less',
+    'lib/less/bootstrap/mixins/buttons.import.less',
+    'lib/less/bootstrap/mixins/center-block.import.less',
+    'lib/less/bootstrap/mixins/clearfix.import.less',
+    'lib/less/bootstrap/mixins/forms.import.less',
+    'lib/less/bootstrap/mixins/gradients.import.less',
+    'lib/less/bootstrap/mixins/grid-framework.import.less',
+    'lib/less/bootstrap/mixins/grid.import.less',
+    'lib/less/bootstrap/mixins/hide-text.import.less',
+    'lib/less/bootstrap/mixins/image.import.less',
+    'lib/less/bootstrap/mixins/labels.import.less',
+    'lib/less/bootstrap/mixins/list-group.import.less',
+    'lib/less/bootstrap/mixins/nav-divider.import.less',
+    'lib/less/bootstrap/mixins/nav-vertical-align.import.less',
+    'lib/less/bootstrap/mixins/opacity.import.less',
+    'lib/less/bootstrap/mixins/pagination.import.less',
+    'lib/less/bootstrap/mixins/panels.import.less',
+    'lib/less/bootstrap/mixins/progress-bar.import.less',
+    'lib/less/bootstrap/mixins/reset-filter.import.less',
+    'lib/less/bootstrap/mixins/reset-text.import.less',
+    'lib/less/bootstrap/mixins/resize.import.less',
+    'lib/less/bootstrap/mixins/responsive-visibility.import.less',
+    'lib/less/bootstrap/mixins/size.import.less',
+    'lib/less/bootstrap/mixins/tab-focus.import.less',
+    'lib/less/bootstrap/mixins/table-row.import.less',
+    'lib/less/bootstrap/mixins/text-emphasis.import.less',
+    'lib/less/bootstrap/mixins/text-overflow.import.less',
+    'lib/less/bootstrap/mixins/vendor-prefixes.import.less',
+    // boostrap variables
     'lib/less/bootstrap/alerts.import.less',
     'lib/less/bootstrap/badges.import.less',
     'lib/less/bootstrap/bootstrap.import.less',
@@ -68,6 +99,7 @@ Package.on_use(function (api) {
     'lib/less/bootstrap/popovers.import.less',
     'lib/less/bootstrap/print.import.less',
     'lib/less/bootstrap/progress-bars.import.less',
+    'lib/less/bootstrap/responsive-embed.import.less',
     'lib/less/bootstrap/responsive-utilities.import.less',
     'lib/less/bootstrap/scaffolding.import.less',
     'lib/less/bootstrap/tables.import.less',
@@ -86,6 +118,7 @@ Package.on_use(function (api) {
     'lib/fonts/glyphicons-halflings-regular.svg',
     'lib/fonts/glyphicons-halflings-regular.ttf',
     'lib/fonts/glyphicons-halflings-regular.woff',
+    'lib/fonts/glyphicons-halflings-regular.woff2',
     'lib/bootstrap.js'
   ],"client");
 
