@@ -56,7 +56,7 @@
       {{#with currentTheme}}
         <div class="row css-boxes">
           <div class="col-sm-6">
-            <label>Custom LESS</label>
+            <label>Custom LESS {{#if error}}<span class='label label-danger'>Error Rendering Theme! Please check formatting.</span>{{/if}}</label>
             <textarea class='form-control css-box' name='customLess'>{{customLess}}</textarea>
           </div>
           <div class="col-sm-6">

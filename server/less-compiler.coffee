@@ -30,27 +30,25 @@ renderTheme = (themeId) ->
   # add custom less
   lessBundle+= thisTheme.customLess || ""
   # now try parsing it all
-  parsed = Meteor._wrapAsync (done) ->
+  parsed = do Meteor._wrapAsync (done) ->
     less.render lessBundle,
       paths: [bootstrapPath] # include all imports
       compress: true
-    , (err, res) ->
-      if err
-        done err
-      else
-        done null, res.css
+    , done
 
-  return parsed()
+  return parsed?.css
 
 
 # Use cfs:powerer-queue to handle throttling etc.
-
-queue = new PowerQueue()
+queue = new PowerQueue maxFailures: 1
 
 updateTheme = (_id) ->
   queue.add (done) ->
-    renderedCss = renderTheme _id
-    Themes.update _id, $set: compiledCss: renderedCss
+    try
+      if renderedCss = renderTheme _id
+        Themes.update _id, $set: compiledCss: renderedCss, error: false
+    catch
+      Themes.update _id, $set: error: true
     done()
 
 Themes.find().observeChanges

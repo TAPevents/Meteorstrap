@@ -16,6 +16,7 @@ if Meteor.isServer
     customLess: 1
     bootswatch: 1
     predefined: 1
+    error: 1
     default: 1
 
   publicFields =
