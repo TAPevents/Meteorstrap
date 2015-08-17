@@ -59,5 +59,5 @@ Themes.find().observeChanges
 
   changed: (_id, doc) ->
     # whenever a theme changes, re-render it
-    if doc.overrides? or doc.bootswatch? or doc.customLess?
+    if doc.defaults? or doc.overrides? or doc.bootswatch? or doc.customLess?
       updateTheme(_id)
