@@ -11,9 +11,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+          <button class="btn btn-default btn-lg dropdown-toggle pull-left margin-right-20" type="button" data-toggle="dropdown">
             Editing: <b>{{currentTheme.name}}{{#if canReset}}<i> - edited</i>{{/if}}</b> <span class="caret"></span>
           </button>
+          <h3>Need help? Click here.</h3>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Tools</li>
             <li><a class='clone-theme' href="#">
@@ -25,6 +26,7 @@
                 <i class='glyphicon glyphicon-repeat'></i> Reset Theme
               </a></li>
             {{/if}}
+
             {{#unless currentTheme.predefined}}
             <li><a class='delete-theme' href="#">
               <i class='glyphicon glyphicon-trash'></i> Delete Theme
@@ -38,6 +40,7 @@
             {{/unless}}
 
             <li class="divider"></li>
+
             <li class="dropdown-header">Change Theme</li>
             {{#each availableThemes}}
               <li><a class='change-theme' href="#">
@@ -46,13 +49,12 @@
                   {{#unless predefined}}<i class='glyphicon glyphicon-user'></i> {{/unless}}{{name}} <small class='text-muted'>by {{author}}</small>
                 </span>
               </a></li>
-            {{/each}}
+           {{/each}}
           </ul>
         </div>
       </div>
-
       {{#with currentTheme}}
-        <div class="row">
+        <div class="row css-boxes">
           <div class="col-sm-6">
             <label>Custom LESS</label>
             <textarea class='form-control css-box' name='customLess'>{{customLess}}</textarea>
@@ -64,6 +66,7 @@
         </div>
       {{/with}}
     </div>
+
     {{> BootstrapMagic}}
   </div>
 </template>

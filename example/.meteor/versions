@@ -63,6 +63,7 @@ spacebars@1.0.6
 spacebars-compiler@1.0.6
 tap:bootstrap-magic@0.1.2
 tap:bootstrap-themer@0.1.0
+tap:bootstrap-themer-bootswatch-themes@0.1.0
 tap:i18n@1.5.1
 templating@1.1.1
 tracker@1.0.7

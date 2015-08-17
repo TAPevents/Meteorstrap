@@ -9,7 +9,9 @@
 <template name="layout">
   <div class="container">
     {{> navbar}}
-    {{> yield}}
+    <div class="content-wrapper">
+      {{> yield}}
+    </div>
   </div>
 </template>
 
@@ -36,7 +38,7 @@
 
 <template name="admin">
   <h1>Admin</h1>
-  <p>This is just an example of a route with it's own theme</p>
+  <div class="alert alert-info"><b>Vanilla Bootstrap Mode Enabled</b> This is an admin route and I will always look the same. Unless you change the Vanilla Bootstrap Theme.</div>
 </template>
 
 

@@ -30,7 +30,6 @@ renderTheme = (themeId) ->
   # add custom less
   lessBundle+= thisTheme.customLess || ""
   # now try parsing it all
-  # console.log 'bundle', lessBundle
   parsed = Meteor._wrapAsync (done) ->
     less.render lessBundle,
       paths: [bootstrapPath] # include all imports
