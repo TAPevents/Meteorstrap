@@ -6,8 +6,8 @@ Themes = BootstrapThemer.Themes = new Meteor.Collection 'BootstrapThemerThemes'
 BootstrapThemer.defaultTheme = -> Themes.findOne({default:true})?._id
 
 if Meteor.isServer
-  # TODO define publishers properly
-  # TODO use `check`
+  BootstrapThemer.isEditor = -> true
+
   adminFields =
     name: 1
     author: 1
@@ -23,7 +23,19 @@ if Meteor.isServer
     compiledCss: 1
     default: 1
 
-  # publish default theme so client knows what to sub to
-  Meteor.publish null, -> Themes.find {default:true}, {fields: {default: 1}}
-  Meteor.publish 'BootstrapThemerCss', (themeId) -> Themes.find themeId, {fields:publicFields}
-  Meteor.publish 'BootstrapThemerEditor', -> Themes.find {}, {fields:adminFields}
+  Meteor.startup ->
+
+    # publish default theme so client knows what to sub to
+    Meteor.publish null, -> Themes.find {default:true}, {fields: {default: 1}}
+
+    # publish specific theme css
+    Meteor.publish 'BootstrapThemerCss', (themeId) ->
+      check themeId, String
+      Themes.find themeId, {fields:publicFields}
+
+    # publish the editor info
+    Meteor.publish 'BootstrapThemerEditor', ->
+      if BootstrapThemer.isEditor.apply @
+        Themes.find {}, {fields:adminFields}
+      else
+        return null

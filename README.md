@@ -28,24 +28,27 @@ Include the editor template somewhere in your project `{{> BootstrapThemer}}`
 
 
 ```
-For v1.0
-- 'Register Theme' method, rather than bundling all themes, create seperate package for tap:bootstrap-themer-bootswatch-themes
-- FastRender + IronRouter integration (route-based themes)
-  - Default theme
-  - Set theme for all /admin/ routes, e.g. w/ fastrender
-- Security for updating themes (is this 'Solved' with allow/deny?)
-- Basic unit tests
+For v0.1 (beta)
+x 'Register Theme' method, rather than bundling all themes, create seperate package for tap:bootstrap-themer-bootswatch-themes
+x FastRender + IronRouter integration (route-based themes)
+  x Default theme
+  x Set theme for all /admin/ routes, e.g. w/ fastrender
+x Security for updating themes (is this 'Solved' with allow/deny?)
+
+- Full english i18n
 - Documentation
 
-For v1.1
+
+For v1.0
+- Unit tests
+- Import/export bootswatch files
+
+After v1.1
+- Export bootswatch / less variables file
 - TAPmedia integration + UI For:
   - Font uploads
   - Backgroud images
   - Icon packs?
-- Full i18n
-
-After v1.1 / Icebucket
-- Export bootswatch / less variables file
 ```
 
 ## License
