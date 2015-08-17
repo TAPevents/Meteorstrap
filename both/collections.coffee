@@ -6,7 +6,7 @@ Themes = Meteorstrap.Themes = new Meteor.Collection 'MeteorstrapThemes'
 Meteorstrap.defaultTheme = -> Themes.findOne({default:true})?._id
 
 if Meteor.isServer
-  Meteorstrap.isEditor = -> true
+  Meteorstrap.publishEditorTo = -> true
 
   adminFields =
     name: 1
@@ -35,7 +35,7 @@ if Meteor.isServer
 
     # publish the editor info
     Meteor.publish 'MeteorstrapEditor', ->
-      if Meteorstrap.isEditor.apply @
+      if Meteorstrap.publishEditorTo.apply @
         Themes.find {}, {fields:adminFields}
       else
         return null
