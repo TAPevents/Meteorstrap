@@ -6,7 +6,7 @@ enabledTheme = BootstrapThemer.enabledTheme = new ReactiveVar BootstrapThemer.de
 
 Meteor.startup ->
   # create style tag in head for injection
-  $cssInjection = $("<style></style>").appendTo 'head'
+  $cssInjection = $("<style></style>").prependTo 'head'
 
   # automatically re-inject compiled CSS
   Tracker.autorun ->
