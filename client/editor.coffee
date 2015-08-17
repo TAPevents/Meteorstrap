@@ -1,19 +1,19 @@
-Themes = BootstrapThemer.Themes
+Themes = Meteorstrap.Themes
 currentTheme = new ReactiveVar()
 getCurrentTheme = -> Themes.findOne(currentTheme.get())
 
-Template.BootstrapThemer.onCreated -> @subscribe 'BootstrapThemerEditor'
+Template.Meteorstrap.onCreated -> @subscribe 'MeteorstrapEditor'
 
-Template._BootstrapThemer.onCreated ->
+Template._Meteorstrap.onCreated ->
   currentTheme.set Themes.findOne({default:true})._id
   @autorun ->
     thisTheme = getCurrentTheme()
     BootstrapMagic.setDefaults thisTheme.defaults
     BootstrapMagic.setOverrides thisTheme.overrides || {}
 
-Template._BootstrapThemer.onRendered -> @$('.dropdown-toggle').dropdown()
+Template._Meteorstrap.onRendered -> @$('.dropdown-toggle').dropdown()
 
-Template._BootstrapThemer.helpers
+Template._Meteorstrap.helpers
   currentTheme: getCurrentTheme
   availableThemes: -> Themes.find({},{sort:{name:1}})
   canReset: ->
@@ -25,7 +25,7 @@ Template._BootstrapThemer.helpers
     else
       return false
 
-Template._BootstrapThemer.events
+Template._Meteorstrap.events
   'click .change-theme' : (e) ->
     currentTheme.set @_id
 
@@ -34,7 +34,7 @@ Template._BootstrapThemer.events
       dataContext:
         newTheme: true
         theme: getCurrentTheme
-      template: 'BootstrapThemerCloneModal'
+      template: 'MeteorstrapCloneModal'
 
   'click .make-default' : ->
     # make others not default
@@ -85,7 +85,7 @@ Template._BootstrapThemer.events
     update[$(e.currentTarget).attr('name')] = e.currentTarget.value
     Themes.update currentTheme.get(), $set: update
 
-Template.BootstrapThemerCloneModal.events
+Template.MeteorstrapCloneModal.events
   'submit form' : (e, tmpl) ->
     e.preventDefault()
     oldTheme = getCurrentTheme()

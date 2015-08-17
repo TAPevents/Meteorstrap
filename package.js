@@ -1,21 +1,21 @@
 Package.describe({
-  summary: 'A Reactive Bootstrap Theme Compiler',
-  name: 'tap:bootstrap-themer',
+  summary: 'A Reactive Bootstrap Theme Editor and Compiler',
+  name: 'tap:meteorstrap',
   version:'0.1.0',
-  git:'https://github.com/TAPevents/bootstrap-themer'
+  git:'https://github.com/TAPevents/meteorstrap'
 });
 
 Npm.depends({'less':'2.5.1'})
 
 Package.on_use(function (api) {
 
-  api.versionsFrom('1.1.0.2');
+  api.versionsFrom('1.1.0.3');
 
   api.use([
     'coffeescript',
     'underscore',
-    'meteorhacks:fast-render',
-    'tap:i18n@1.5.0'
+    'meteorhacks:fast-render@2.8.1',
+    'tap:i18n@1.5.1'
   ], ['client','server']);
 
   api.use([

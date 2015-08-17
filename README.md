@@ -1,47 +1,51 @@
-# BootstrapThemer
+# Meteorstrap
 
-**A Reactive Bootstrap Theme Editor for Meteor**
+### The ultimate Bootstrap Theme Manager for Meteor
 
-BootstrapThemer reactively compiles [Bootstrap 3](https://github.com/twbs/bootstrap) with user-defined custom variables and delivers the CSS to clients, who will have their stylesheets updated without refreshing their browser.
-
-The [Bootstrap Magic](https://github.com/hitchcott/meteor-bootstrap-magic) package is implemented to allow easy editing of all of Bootstrap 3's LESS variables.
-
-BootstrapThemer comes bundled with several [Bootswatch](https://github.com/thomaspark/bootswatch/) themes.
-
-## Quickstart
-
-If you already use a bootstrap 3 package, remove it.
-
-Install using `meteor add tap:bootstrap-themer`
-
-Include the editor template somewhere in your project `{{> BootstrapThemer}}`
+Meteorstrap providess an interface for creating and editing Bootstrap themes, whilst reactively compiling LESS on the server and sending that CSS back to clients.
 
 ## Features
 
-* Theme Presets and Switching - Includes bootstswatch themes
+* Rich BootstrapMagic+ Theme Editor; effortly tweak any Bootstrap LESS varaible
+* Theme presets, creation, editing and switching (without restarting Meteor)
 * On-the-fly css updates to all clients without refreshing their browser
-* Super-detailed tweaking without CSS knowledge using Bootsrap variables
-* Free-type custom CSS overrides
-* BootstrapMagic+ Theme Editor (with enhanced UI)
+* Reactive, free-type custom LESS can be added to themes
+* Implements `meteorhacks:fast-render`; CSS is sent in initial payload to avoid waiting for subscription
+* [TODO] Easily import/export themes in familiar Bootswatch format
 
-## Todo
+## Quickstart
 
+1. If you already use a bootstrap 3 package, remove it.
+2. Add the packge using `meteor add tap:meteorstrap`
+3. Include the editor template somewhere in your project using `{{> Meteorstrap}}`
+4. That's it! If need to manage permissions, continue reading the guide below.
+
+## Overview
+
+On the client, the `[tap:bootstrap-magic-plus](https://github.com/hitchcott/meteor-bootstrap-magic)` package is implemented to allow for programmerless editing of all of Bootstrap 3's LESS variables. Project managers can also clone/edit/remove custom themes and use them as defaults - connected clients will be updated reactivley in all cases.
+
+You can create and edit custom themes, export your themes, and require 3rd party package themes, such as `[tap:meteorstrap-bootswatch-themes](https://github.com/tapevents/meteorstrap-bootswatch-themes)`, which contains all the default [Bootswatch Themes](https://bootswatch.com/).
+
+Whenever a varaible is edited, an `override` is set on that theme, which will trigger a theme to re-render on the server side. This will bundle and compile into CSS the following files in the following order: Bootstrap LESS, Bootstrap Variables, Theme `default` variables, Theme `override` variables, Theme LESS, Custom LESS.
+
+This compiled CSS is published and re-injected into the `head` of clients whenever it is changed, and is sent in the initial payload of new connections by default using meteorhacks:fastrender.
+
+## Security
+
+Meteorstrap uses allow/deny for collection security. There is only one collection, `MeteorstrapThemes`, which contains
+
+
+## Todos
 
 ```
 For v0.1 (beta)
-x 'Register Theme' method, rather than bundling all themes, create seperate package for tap:bootstrap-themer-bootswatch-themes
-x FastRender + IronRouter integration (route-based themes)
-  x Default theme
-  x Set theme for all /admin/ routes, e.g. w/ fastrender
-x Security for updating themes (is this 'Solved' with allow/deny?)
-
 - Full english i18n
 - Documentation
 
 
-For v1.0
-- Unit tests
+For v1.0 (first release)
 - Import/export bootswatch files
+- Unit tests
 
 After v1.1
 - Export bootswatch / less variables file

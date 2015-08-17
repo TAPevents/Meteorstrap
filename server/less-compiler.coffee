@@ -1,8 +1,8 @@
 fs = Npm.require 'fs'
 less = Npm.require 'less'
 
-Themes = BootstrapThemer.Themes
-assetsRoot = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_bootstrap-themer/lib/less"
+Themes = Meteorstrap.Themes
+assetsRoot = "#{__meteor_bootstrap__.serverDir}/assets/packages/tap_meteorstrap/lib/less"
 bootstrapPath = "#{assetsRoot}/bootstrap"
 rootFile = "bootstrap.import.less"
 
@@ -23,8 +23,8 @@ renderTheme = (themeId) ->
   for key, val of thisTheme.overrides || {}
     if val and val isnt ''
       lessBundle+= "#{key}: #{val};\n"
-  # always add/override font path specific to BootstrapThemer for glyphicons
-  lessBundle+= "@icon-font-path: \"/packages/tap_bootstrap-themer/lib/fonts/\";\n"
+  # always add/override font path specific to Meteorstrap for glyphicons
+  lessBundle+= "@icon-font-path: \"/packages/tap_meteorstrap/lib/fonts/\";\n"
   # add bootswatch theme
   lessBundle+= thisTheme.bootswatch || ""
   # add custom less

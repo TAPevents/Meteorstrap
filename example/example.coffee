@@ -1,12 +1,11 @@
-
-Router.plugin 'BootstrapThemer', preload: ['vanilla']
+Router.plugin 'Meteorstrap', preload: ['yeti']
 
 Router.configure layoutTemplate: 'layout'
 Router.route '/', -> @render 'welcome'
 Router.route 'welcome'
 Router.route 'about'
 Router.route 'editor'
-Router.route 'admin', BootstrapThemer: 'vanilla'
+Router.route 'admin', Meteorstrap: 'yeti'
 
 if Meteor.isClient
   Template.navbar.helpers

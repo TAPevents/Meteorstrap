@@ -1,12 +1,12 @@
-@BootstrapThemer = @BootstrapThemer || {}
+@Meteorstrap = @Meteorstrap || {}
 
 # collections
-Themes = BootstrapThemer.Themes = new Meteor.Collection 'BootstrapThemerThemes'
+Themes = Meteorstrap.Themes = new Meteor.Collection 'MeteorstrapThemes'
 
-BootstrapThemer.defaultTheme = -> Themes.findOne({default:true})?._id
+Meteorstrap.defaultTheme = -> Themes.findOne({default:true})?._id
 
 if Meteor.isServer
-  BootstrapThemer.isEditor = -> true
+  Meteorstrap.isEditor = -> true
 
   adminFields =
     name: 1
@@ -29,13 +29,13 @@ if Meteor.isServer
     Meteor.publish null, -> Themes.find {default:true}, {fields: {default: 1}}
 
     # publish specific theme css
-    Meteor.publish 'BootstrapThemerCss', (themeId) ->
+    Meteor.publish 'MeteorstrapCss', (themeId) ->
       check themeId, String
       Themes.find themeId, {fields:publicFields}
 
     # publish the editor info
-    Meteor.publish 'BootstrapThemerEditor', ->
-      if BootstrapThemer.isEditor.apply @
+    Meteor.publish 'MeteorstrapEditor', ->
+      if Meteorstrap.isEditor.apply @
         Themes.find {}, {fields:adminFields}
       else
         return null

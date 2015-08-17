@@ -1,8 +1,8 @@
-Iron.Router.plugins.BootstrapThemer = (router, options) ->
+Iron.Router.plugins.Meteorstrap = (router, options) ->
   # resolve default theme if it's a function
   # client-side hook for switching themes
   Router.onBeforeAction (router, option) ->
-    BootstrapThemer.enabledTheme.set @route.options.BootstrapThemer || BootstrapThemer.defaultTheme()
+    Meteorstrap.enabledTheme.set @route.options.Meteorstrap || Meteorstrap.defaultTheme()
     @next()
 
   # fastrender the routes
@@ -11,6 +11,6 @@ Iron.Router.plugins.BootstrapThemer = (router, options) ->
     unless options.fastRender is false
       # add the default theme to all routes
       FastRender.onAllRoutes ->
-        @subscribe 'BootstrapThemerCss', BootstrapThemer.defaultTheme()
+        @subscribe 'MeteorstrapCss', Meteorstrap.defaultTheme()
         for themeId in preloadThemes
-          @subscribe 'BootstrapThemerCss', themeId
+          @subscribe 'MeteorstrapCss', themeId

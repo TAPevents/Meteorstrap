@@ -1,8 +1,8 @@
-@BootstrapThemer = @BootstrapThemer || {}
+@Meteorstrap = @Meteorstrap || {}
 
-Themes = BootstrapThemer.Themes
+Themes = Meteorstrap.Themes
 
-enabledTheme = BootstrapThemer.enabledTheme = new ReactiveVar BootstrapThemer.defaultTheme()
+enabledTheme = Meteorstrap.enabledTheme = new ReactiveVar Meteorstrap.defaultTheme()
 
 Meteor.startup ->
   # create style tag in head for injection
@@ -15,4 +15,4 @@ Meteor.startup ->
 
   # automatically re-subscribe to enabledTheme
   Tracker.autorun ->
-    Meteor.subscribe 'BootstrapThemerCss', enabledTheme.get()
+    Meteor.subscribe 'MeteorstrapCss', enabledTheme.get()
