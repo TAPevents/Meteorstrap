@@ -8,6 +8,7 @@ meteor-platform
 insecure
 coffeescript
 tap:meteorstrap
+tap:bootstrap-magic
 #tap:bootstrap-themer-bootswatch-themes
 tap:i18n
 tap:i18n-ui

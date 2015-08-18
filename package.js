@@ -148,6 +148,6 @@ Package.on_use(function (api) {
   api.add_files([
     'i18n/en.i18n.json',
     'i18n/zh.i18n.json'
-  ], ["server","client"]);
+  ],["client", "server"]);
 
 });
