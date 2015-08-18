@@ -30,12 +30,12 @@ if Meteor.isServer
 
     # publish specific theme css
     Meteor.publish 'MeteorstrapCss', (themeId) ->
-      check themeId, String
+      Match.Optional themeId, String
       Themes.find themeId, {fields:publicFields}
 
     # publish the editor info
     Meteor.publish 'MeteorstrapEditor', ->
       if Meteorstrap.publishEditorTo.apply @
-        Themes.find {}, {fields:adminFields}
+        return Themes.find {}, {fields:adminFields}
       else
         return null
