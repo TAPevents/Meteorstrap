@@ -1,8 +1,8 @@
 # Meteorstrap
 
-### The Ultimate Bootstrap Theme Manager for Meteor
+### A Bootstrap Theme Manager for Meteor
 
-Meteorstrap providess an interface for effortlessly creating and editing Bootstrap Themes, whilst reactively compiling and delivering theme CSS to clients. It's a replaement for the static Bootstrap package for Meteor, and it allows you to edit your project's Boostrap CSS themes in-app and without any CSS knowledge.
+Meteorstrap providess an interface for effortlessly creating and editing Bootstrap Themes, whilst reactively compiling and delivering theme CSS to clients. It's a replacement for the static Bootstrap package for Meteor, and it allows you to edit your project's theme in-app and without having to know how to write CSS.
 
 Meteorstrap was created by [TAPevents](http://github.com/tapevents) - we make [apps for events](http://tapevents.com).
 
@@ -14,8 +14,8 @@ Meteorstrap was created by [TAPevents](http://github.com/tapevents) - we make [a
 * **Free-type custom LESS** to build or tweak your themes
 * **Fast-rendered CSS** is sent in initial payload
 * [TODO] **Easily import/export** themes in familiar Bootswatch format
-* **Free themes** optionally include all [Bootswatch](http://bootswatch.com) themes
-* **Full i18n** via tap-i18n; pull requests in your locale encouraged!
+* **Free themes**; optionally include all [Bootswatch](http://bootswatch.com) themes via `tap:meterostrap-bootswatch`
+* **Full i18n** via tap-i18n; pull requests in your locale encouraged!  
 
 ## Quickstart
 
@@ -141,12 +141,21 @@ Meteorstrap.registerPredefinedTheme
   	'@brand-primary':'red'
 ```
 
+## Internationalization
+
+This project uses [tap:i18n](https://github.com/tapevents/tap-i18n), and currently supports:
+
+* English
+* Chinese (thanks to Sarah L)
+
+Pull requests in your native laguage are appreciated!
+
 ## Todos
 
 ```
 For v1.0 (public release)
-- video
-- Import/export bootswatch files
+- Video Tutorial
+- Import/Export bootswatch files
 - Unit tests
 
 After v1.1
@@ -162,11 +171,10 @@ After v1.1
 
 MIT, 2014
 
-## Credits / Packages Used
+## Contributions
 
-* Bootstrap
-* BootstrapMagic
-* Bootswatch
-* LESS Compiler
+Originally created by [Chris Hitchcott](http://github.com/hitchcott) for [TAPevents](http://tapevents.com).
 
-Created by [Chris Hitchcott](http://github.com/hitchcott) for [TAPevents](http://tapevents.com).
+Contributions by [Talia](https://github.com/titaniumtails) and Sarah
+
+Pull Requests for new features and bugfixes are always welcome.
