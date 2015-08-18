@@ -68,6 +68,7 @@ tap:bootstrap-magic@0.1.2
 tap:i18n@1.5.1
 tap:i18n-ui@0.7.0
 tap:meteorstrap@0.1.0
+tap:meteorstrap-bootswatch@0.1.0
 templating@1.1.1
 tracker@1.0.7
 ui@1.0.6
