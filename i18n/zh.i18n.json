@@ -1,7 +1,7 @@
 {
-  "loading": "Loading...",
-  "editing": "Editing",
-  "edited": "Edited",
+  "loading": "請稍等...",
+  "editing": "正編輯",
+  "edited": "已編輯",
   "tools": "Tools",
   "clone_theme": "Clone Theme",
   "reset_theme": "Reset THeme",
