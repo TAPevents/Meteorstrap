@@ -1,6 +1,6 @@
 # Meteorstrap
 
-### A Bootstrap Theme Manager for Meteor
+### A Reactive Bootstrap Theme Manager for Meteor
 
 Meteorstrap providess an interface for effortlessly creating and editing Bootstrap Themes, whilst reactively compiling and delivering theme CSS to clients. It's a replacement for the static Bootstrap package for Meteor, and it allows you to edit your project's theme in-app and without having to know how to write CSS.
 
@@ -159,8 +159,6 @@ For v1.0 (public release)
 - Unit tests
 
 After v1.1
-- Export bootswatch / less variables file
-- Option for user-defined themes
 - TAPmedia integration + UI For:
   - Font uploads
   - Backgroud images
