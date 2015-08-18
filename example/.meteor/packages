@@ -9,4 +9,6 @@ insecure
 coffeescript
 tap:meteorstrap
 #tap:bootstrap-themer-bootswatch-themes
+tap:i18n
+tap:i18n-ui
 iron:router

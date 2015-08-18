@@ -26,6 +26,7 @@ For new/existing Meteor projects:
 1. If you already use a Bootstrap 3 package, remove it.
 2. Add the packge using `meteor add tap:meteorstrap` (and `tap:meteorstrap-bootswatch` if you want some free themes to get you going)
 3. Include the editor template somewhere in your project using `{{> Meteorstrap}}`
+4. Initialize your routes with `Router.plugin 'Meteorstrap'`
 
 That's it! If need to manage permissions, continue reading below.
 
