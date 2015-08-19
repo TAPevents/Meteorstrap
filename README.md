@@ -155,6 +155,9 @@ Pull requests in your native laguage are appreciated!
 ## Todos
 
 ```
+- use registerBuildPlugin for meteorstrap.bootswatch.less, meteorstrap.variables.less
+  - create JS strings that gets evaluated on the server
+
 For v1.0 (public release)
 - Video Tutorial
 - Import/Export bootswatch files

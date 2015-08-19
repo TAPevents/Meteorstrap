@@ -141,9 +141,6 @@ Package.on_use(function (api) {
     'client/injector.coffee'
   ],"client");
 
-
-
-
   // i18n
   api.add_files([
     'i18n/en.i18n.json',
@@ -151,3 +148,21 @@ Package.on_use(function (api) {
   ],["client", "server"]);
 
 });
+
+Package.on_test(function (api) {
+
+  api.use([
+    'tinytest',
+    'coffeescript',
+    'test-helpers',
+    'tap:meteorstrap'
+  ], ['client','server']);
+
+  api.add_files([
+    'tests/meteorstrap-tests.coffee'
+  ], ['client', 'server'])
+
+});
+
+
+

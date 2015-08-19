@@ -9,7 +9,8 @@ rootFile = "bootstrap.import.less"
 # read bootstrap variables once, keep in memory for future compilation.
 bootstrapLESS = fs.readFileSync "#{bootstrapPath}/#{rootFile}", 'utf8'
 
-renderTheme = (themeId) ->
+# share for testing
+Meteorstrap._renderTheme = (themeId) ->
   thisTheme = Themes.findOne themeId
   # build the less file
   lessBundle = ""
@@ -45,7 +46,7 @@ queue = new PowerQueue maxFailures: 1
 updateTheme = (_id) ->
   queue.add (done) ->
     try
-      if renderedCss = renderTheme _id
+      if renderedCss = Meteorstrap._renderTheme _id
         Themes.update _id, $set: compiledCss: renderedCss, error: false
     catch
       Themes.update _id, $set: error: true
@@ -61,3 +62,4 @@ Themes.find().observeChanges
     # whenever a theme changes, re-render it
     if doc.defaults? or doc.overrides? or doc.bootswatch? or doc.customLess?
       updateTheme(_id)
+
