@@ -154,7 +154,7 @@ Package.on_test(function (api) {
   api.use([
     'tinytest',
     'coffeescript',
-    'test-helpers',
+    'mongo',
     'tap:meteorstrap'
   ], ['client','server']);
 
