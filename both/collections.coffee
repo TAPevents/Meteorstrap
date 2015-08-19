@@ -7,6 +7,7 @@ Meteorstrap.defaultTheme = -> Themes.findOne({default:true})?._id
 
 if Meteor.isClient
   Meteorstrap.enabledTheme = new ReactiveVar Meteorstrap.defaultTheme()
+  Meteorstrap._defaultSubscription = Meteor.subscribe 'MeteorstrapDefaultTheme'
 
 if Meteor.isServer
   Meteorstrap.publishEditorTo = -> true
@@ -29,7 +30,7 @@ if Meteor.isServer
   Meteor.startup ->
 
     # publish default theme so client knows what to sub to
-    Meteor.publish null, -> Themes.find {default:true}, {fields: {default: 1}}
+    Meteor.publish 'MeteorstrapDefaultTheme', -> Themes.find {default:true}, {fields: {default: 1}}
 
     # publish specific theme css
     Meteor.publish 'MeteorstrapCss', (themeId) ->
@@ -37,8 +38,8 @@ if Meteor.isServer
       Themes.find themeId, {fields:publicFields}
 
     # publish the editor info
-    Meteor.publish 'MeteorstrapEditor', ->
+    Meteor.publish 'MeteorstrapEditor', (params) ->
       if Meteorstrap.publishEditorTo.apply @
         return Themes.find {}, {fields:adminFields}
       else
-        return null
+        return @stop()
