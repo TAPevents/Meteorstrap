@@ -161,6 +161,8 @@ For v1.0 (public release)
 - Unit tests
 
 After v1.1
+- use registerBuildPlugin like i18n for meteorstrap.bootswatch.less, meteorstrap.variables.less
+  - create JS strings that gets evaluated on the server
 - TAPmedia integration + UI For:
   - Font uploads
   - Backgroud images

@@ -5,6 +5,9 @@ Themes = Meteorstrap.Themes = new Meteor.Collection 'MeteorstrapThemes'
 
 Meteorstrap.defaultTheme = -> Themes.findOne({default:true})?._id
 
+if Meteor.isClient
+  Meteorstrap.enabledTheme = new ReactiveVar Meteorstrap.defaultTheme()
+
 if Meteor.isServer
   Meteorstrap.publishEditorTo = -> true
 
