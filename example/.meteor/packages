@@ -7,8 +7,9 @@
 meteor-platform
 insecure
 coffeescript
-tap:meteorstrap
-tap:meteorstrap-bootswatch
 tap:i18n
 tap:i18n-ui
+tap:meteorstrap
+tap:bootstrap-magic # for i18n
+tap:meteorstrap-bootswatch
 iron:router

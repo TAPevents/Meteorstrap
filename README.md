@@ -30,6 +30,8 @@ For new/existing Meteor projects:
 
 That's it! If need to manage permissions, continue reading below.
 
+If you want to enable i18n, you'll also need to add `tap:bootstrap-magic` to your project for languages to switch properly.
+
 ## What does it do?
 
 On the client, a template is provided that uses [`tap:bootstrap-magic-plus`](https://github.com/hitchcott/meteor-bootstrap-magic) to allow for programmerless editing of all of Bootstrap 3's LESS variables. Editors can clone/edit/remove custom themes, edit custom LESS, and set which theme is used as the default for your project. You can also require and edit 3rd party themes, such as [`tap:meteorstrap-bootswatch-themes`](https://github.com/tapevents/meteorstrap-bootswatch-themes), which contains all the latest [Bootswatch Themes](https://bootswatch.com/).
