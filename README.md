@@ -4,16 +4,14 @@
 
 Meteorstrap providess an interface for effortlessly creating and editing Bootstrap Themes, whilst reactively compiling and delivering theme CSS to clients. It's a replacement for the static Bootstrap package for Meteor, and it allows you to edit your project's theme in-app and without having to know how to write CSS.
 
-Meteorstrap was created by [TAPevents](http://github.com/tapevents) - we make [apps for events](http://tapevents.com).
-
-## Features
+## Features
 
 * **Rich Theme Editor**; BootstrapMagic+ allows you to effortly tweak any Bootstrap LESS varaible
 * **On-the-fly CSS updates** in-app, to all clients without refreshing their session
 * **Route-based themes**; you can style `/admin` routes differently without worrying about namespacing
+* [TODO] **Easily import/export** themes in familiar Bootswatch format
 * **Free-type custom LESS** to build or tweak your themes
 * **Fast-rendered CSS** is sent in initial payload
-* [TODO] **Easily import/export** themes in familiar Bootswatch format
 * **Free themes**; optionally include all [Bootswatch](http://bootswatch.com) themes via `tap:meterostrap-bootswatch`
 * **Full i18n** via tap-i18n; pull requests in your locale encouraged!  
 
@@ -34,11 +32,11 @@ If you want to enable i18n, you'll also need to add `tap:bootstrap-magic` to you
 
 ## What does it do?
 
-On the client, a template is provided that uses [`tap:bootstrap-magic-plus`](https://github.com/hitchcott/meteor-bootstrap-magic) to allow for programmerless editing of all of Bootstrap 3's LESS variables. Editors can clone/edit/remove custom themes, edit custom LESS, and set which theme is used as the default for your project. You can also require and edit 3rd party themes, such as [`tap:meteorstrap-bootswatch-themes`](https://github.com/tapevents/meteorstrap-bootswatch-themes), which contains all the latest [Bootswatch Themes](https://bootswatch.com/).
+On the client, a template is provided that uses [`tap:bootstrap-magic`](https://github.com/hitchcott/meteor-bootstrap-magic) to allow for programmerless editing of all of Bootstrap 3's LESS variables. Editors can clone/edit/remove custom themes, edit custom LESS, and set which theme is used as the default for your project. You can also require and edit 3rd party themes, such as [`tap:meteorstrap-bootswatch`](https://github.com/tapevents/meteorstrap-bootswatch), which contains all the latest [Bootswatch Themes](https://bootswatch.com/).
 
 Whenever you update a theme, it will be automatically updated and sent to clients. If you edit or set the default theme, clients' active sessions CSS will update reactively. If a theme varaible is edited, an `override` is set on that theme, which will trigger a CSS re-render on the server side. This will bundle and compile into CSS the following files in the following order: Bootstrap itself, Theme `default` variables, Theme `override` variables, Theme LESS, Custom LESS.
 
-This compiled CSS is published and re-injected into the `head` of clients whenever it is changed, and is sent in the initial payload of new connections by default using `meteorhacks:fastrender`.
+This compiled CSS is published and re-injected into the `head` of clients whenever it is changed, and is sent in the initial payload of new connections by default using [`meteorhacks:fastrender`](https://github.com/meteorhacks/fast-render).
 
 ## Editing Themes
 
@@ -116,7 +114,7 @@ BootstrapMagic+ also exposes some useful methods that are covered in it's docume
 
 Predefined themes are any themes that are included as packages via the `registerPredefinedTheme` method. Non-predefined themes (user-defiend) are always cloned from an existing theme (or plain bootstrap).
 
-Have a look at the meteorstrap-bootswatch-themes package for an example of how to package a custom theme that's compatible with Meteorstrap. It's basically a case of copy-pasting the Bootswatch format (`bootswatch.less` and `variables.less`), adding it as an asset, and envoking:
+Have a look at the [meteorstrap-bootswatch](https://github.com/TAPevents/meteorstrap-bootswatch) package for an example of how to package a custom theme that's compatible with Meteorstrap. It's basically a case of copy-pasting the Bootswatch format (`bootswatch.less` and `variables.less`), adding it as an asset, and envoking:
 
 ```coffeescript
 BootstrapThemer.registerPredefinedTheme
@@ -172,10 +170,6 @@ After v1.1
   - Icon packs
 ```
 
-## License
-
-MIT, 2014
-
 ## Contributions
 
 Originally created by [Chris Hitchcott](http://github.com/hitchcott) for [TAPevents](http://tapevents.com).
@@ -183,3 +177,5 @@ Originally created by [Chris Hitchcott](http://github.com/hitchcott) for [TAPeve
 Contributions by [Talia](https://github.com/titaniumtails) and Sarah
 
 Pull Requests for new features and bugfixes are always welcome.
+
+**MIT License** 2015, TAPevents - we make [apps for events](http://tapevents.com).
