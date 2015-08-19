@@ -18,5 +18,12 @@ if Iron?
 else
 
   if Meteor.isClient
+    oldSub = undefined
     Tracker.autorun ->
+      oldSub.stop() if oldSub.stop?
+      oldSub = Meteor.subscribe 'MeteorstrapCss', Meteorstrap.defaultTheme()
       Meteorstrap.enabledTheme.set Meteorstrap.defaultTheme()
+
+  if Meteor.isServer
+    FastRender.onAllRoutes ->
+      @subscribe 'MeteorstrapCss', Meteorstrap.defaultTheme()
