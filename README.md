@@ -55,7 +55,7 @@ An [introductory tutorial for the editor](https://github.com/TAPevents/Meteorstr
 
 ## Custom Routes
 
-Meteorstrap will, by default, render the `default` theme on all routes, the default theme can be set the GUI. If you'd like to have different themes for different routes, Meteorstrap supports this by hooking into iron:router:
+Meteorstrap will, by default, render the `default` theme on all routes, the default theme can be set in the GUI. If you'd like to have different themes for different routes, Meteorstrap supports this by hooking into iron:router:
 
 ```coffeescript
 Router.plugin 'Meteorstrap', preload: ['yeti']
@@ -66,7 +66,7 @@ The above shows all you'd need to do to use the bootswatch theme `yeti` on the a
 
 ## Security
 
-Meteorstrap uses allow/deny for collection security. There is only one collection, `MeteorstrapThemes`, which contains all available themes including user generated themes. Please secure this selection using typical (allow/deny pattern):
+Meteorstrap uses allow/deny for collection security. There is only one collection, `MeteorstrapThemes`, which contains all available themes, including user generated themes. Please secure this selection using typical (allow/deny pattern):
 
 ```coffeescript
 Meteorstrap.Themes.allow # or `Meteorstrap.Themes.deny`
