@@ -8,6 +8,7 @@
   "delete_theme": "删除主题",
   "make_default": "设为预设",
   "change_theme": "更改主题",
+  // intentionally commented out to fallback to english
   // "by_author": "by %s",
   "custom_less": "定制 LESS",
   "error_rendeirng_theme": "创作主题失败! 请查看并更改错误的输入。",

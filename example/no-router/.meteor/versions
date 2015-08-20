@@ -56,7 +56,7 @@ service-configuration@1.0.4
 session@1.1.0
 spacebars@1.0.6
 spacebars-compiler@1.0.6
-tap:bootstrap-magic@0.1.2
+tap:bootstrap-magic@0.1.1
 tap:i18n@1.5.1
 tap:i18n-ui@0.7.0
 tap:meteorstrap@0.1.0

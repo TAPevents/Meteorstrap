@@ -157,6 +157,7 @@ Pull requests in your native laguage are appreciated!
 For v1.0 (public release)
 - Video Tutorial
 - Import/Export bootswatch files
+- "Sticky" Previews (follow scrolling)
 - Flow-router integration
 - use registerBuildPlugin for meteorstrap.bootswatch.less, meteorstrap.variables.less
   - create JS strings that gets evaluated on the server
