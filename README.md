@@ -1,4 +1,4 @@
-# Meteorstrap
+# Meteorstrap (beta)
 
 ### A Reactive Bootstrap Theme Manager for Meteor
 
@@ -8,12 +8,12 @@ Meteorstrap providess an interface for effortlessly creating and editing Bootstr
 
 * **Rich Theme Editor**; BootstrapMagic+ allows you to effortly tweak any Bootstrap LESS varaible
 * **On-the-fly CSS updates** in-app, to all clients without refreshing their session
-* **Route-based themes**; you can style `/admin` routes differently without worrying about namespacing
-* [TODO] **Easily import/export** themes in familiar Bootswatch format
+* **Route-based themes**; you can style `admin` routes differently without worrying about namespacing (currently support Iron-rouer only)
 * **Free-type custom LESS** to build or tweak your themes
 * **Fast-rendered CSS** is sent in initial payload
 * **Free themes**; optionally include all [Bootswatch](http://bootswatch.com) themes via `tap:meterostrap-bootswatch`
 * **Full i18n** via tap-i18n; pull requests in your locale encouraged!  
+* [TODO] **Easily import/export** themes in familiar Bootswatch format
 
 ## Quickstart
 
@@ -24,7 +24,8 @@ For new/existing Meteor projects:
 1. If you already use a Bootstrap 3 package, remove it.
 2. Add the packge using `meteor add tap:meteorstrap` (and `tap:meteorstrap-bootswatch` if you want some free themes to get you going)
 3. Include the editor template somewhere in your project using `{{> Meteorstrap}}`
-4. Initialize your routes with `Router.plugin 'Meteorstrap'`
+
+If you are using Iron-Router in your project, initialize your routes with `Router.plugin 'Meteorstrap'`, otherwise you're already done.
 
 That's it! If need to manage permissions, continue reading below.
 
@@ -153,17 +154,14 @@ Pull requests in your native laguage are appreciated!
 ## Todos
 
 ```
-- use registerBuildPlugin for meteorstrap.bootswatch.less, meteorstrap.variables.less
-  - create JS strings that gets evaluated on the server
-
 For v1.0 (public release)
 - Video Tutorial
 - Import/Export bootswatch files
-- Unit tests
+- Flow-router integration
+- use registerBuildPlugin for meteorstrap.bootswatch.less, meteorstrap.variables.less
+  - create JS strings that gets evaluated on the server
 
 After v1.1
-- use registerBuildPlugin like i18n for meteorstrap.bootswatch.less, meteorstrap.variables.less
-  - create JS strings that gets evaluated on the server
 - TAPmedia integration + UI For:
   - Font uploads
   - Backgroud images
@@ -174,7 +172,7 @@ After v1.1
 
 Originally created by [Chris Hitchcott](http://github.com/hitchcott) for [TAPevents](http://tapevents.com).
 
-Contributions by [Talia](https://github.com/titaniumtails) and Sarah
+Contributions by [Talia](https://github.com/titaniumtails) and Sarah L.
 
 Pull Requests for new features and bugfixes are always welcome.
 

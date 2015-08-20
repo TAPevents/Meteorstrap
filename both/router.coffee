@@ -19,4 +19,9 @@ else
 
   if Meteor.isClient
     Tracker.autorun ->
+      Meteor.subscribe 'MeteorstrapCss', Meteorstrap.defaultTheme()
       Meteorstrap.enabledTheme.set Meteorstrap.defaultTheme()
+
+  if Meteor.isServer
+    FastRender.onAllRoutes ->
+      @subscribe 'MeteorstrapCss', Meteorstrap.defaultTheme()
