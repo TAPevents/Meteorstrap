@@ -10,7 +10,7 @@ Visit the editor (by including `{{> Meteorstrap}}` somewhere in your project. Th
 
 Scroll down a bit to the variables section, peruse the available options, navigate around, and search for `@grey-base`. Let's override this with `red`. As soon as you make the change, you should notice that all of the text is now red! Wow. Meteorstrap just re-compiled Bootstrap but with a red grey-base.
 
-Whenever you override a variable in the editor, an `override` is created for that particular variable, which is used during the compilation of LESS instead of the `default` variable. Each time you change a varaible the theme is recompiled, so as you tweak the variables in the editor, you'll notice the CSS automatically changes with in a few seconds.
+Whenever you override a variable in the editor, an `override` is created for that particular variable, which is used during the compilation of LESS instead of the `default` variable. Each time you change a variable the theme is recompiled, so as you tweak the variables in the editor, you'll notice the CSS automatically changes with in a few seconds.
 
 Whenever you delete an override, the theme will fallback to the default variable. To delete an override simple remove the text from that variable input box.
 
