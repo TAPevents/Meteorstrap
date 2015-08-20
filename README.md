@@ -6,7 +6,7 @@ Meteorstrap provides an interface for effortlessly creating and editing Bootstra
 
 ## Features
 
-* **Rich Theme Editor**; BootstrapMagic+ allows you to effortlessly tweak any Bootstrap LESS variable
+* **Rich Theme Editor**; [BootstrapMagic+](http://github.com/tapevents/meteor-bootstrap-magic) allows you to effortlessly tweak any Bootstrap LESS variable
 * **On-the-fly CSS updates** in-app, to all clients without refreshing their session
 * **Route-based themes**; you can style `admin` routes differently without worrying about namespacing (currently supports Iron-Router only)
 * **Free-type custom LESS** to build or tweak your themes
