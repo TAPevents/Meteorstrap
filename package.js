@@ -28,8 +28,8 @@ Package.on_use(function (api) {
     'templating',
     'tracker',
     'reactive-var',
-    'hitchcott:ez-modal',
-    'tap:bootstrap-magic'
+    'hitchcott:ez-modal@0.1.3',
+    'tap:bootstrap-magic@0.1.1'
   ], ['client']);
 
   // i18n
