@@ -6,7 +6,7 @@ For a tutorial on how to get started with editing, please read this guide. It wi
 
 By default, Meteorstrap will come with at least one theme, 'Vanilla Bootstrap' by Twitter, which is plain old Bootstrap with no custom variables and no custom LESS. If you've changed the default theme to something else, change it back to Vanilla Bootstrap for the sake of this guide.
 
-Visit the editor (by including `{{> Meteorstrap}}` somewhere in your project. The first thing you'll see is to textareas for Custom LESS and Theme Less. Ignore those for now.
+Visit the editor (by including `{{> Meteorstrap}}` somewhere in your project) and the first thing you'll see is two textareas for Custom LESS and Theme Less. Ignore those for now.
 
 Scroll down a bit to the variables section, peruse the available options, navigate around, and search for `@grey-base`. Let's override this with `red`. As soon as you make the change, you should notice that all of the text is now red! Wow. Meteorstrap just re-compiled Bootstrap but with a red grey-base.
 
