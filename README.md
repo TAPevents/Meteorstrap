@@ -45,7 +45,7 @@ Once you're set up and can access the GUI, we can step through how to edit theme
 
 For a tutorial on how to get started with editing, please read this guide and for the video-learners, watch this video: [TBC]
 
-An [introductory tutorial for the editor](https://github.com/tapevents/meteorstrap/TUTORIAL.md) is also available, which covers:
+An [introductory tutorial for the editor](https://github.com/TAPevents/Meteorstrap/blob/master/TUTORIAL.md) is also available, which covers:
 
 * Editing Variables
 * Custom LESS
