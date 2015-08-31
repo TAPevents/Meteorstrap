@@ -14,12 +14,12 @@ Package.on_use(function (api) {
   api.use([
     'coffeescript',
     'underscore',
-    'meteorhacks:fast-render@2.8.1',
+    'meteorhacks:fast-render@2.9.0',
     'tap:i18n@1.5.1'
   ], ['client','server']);
 
   api.use([
-    'cfs:micro-queue',
+    'cfs:micro-queue@0.0.6',
     'cfs:power-queue@0.9.11'
   ], 'server')
 
