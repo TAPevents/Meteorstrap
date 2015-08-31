@@ -1,7 +1,7 @@
 Package.describe({
   summary: 'A Reactive Bootstrap Theme Editor and Compiler',
   name: 'tap:meteorstrap',
-  version:'0.1.0',
+  version:'0.1.1',
   git:'https://github.com/TAPevents/meteorstrap'
 });
 
