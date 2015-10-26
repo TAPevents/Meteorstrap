@@ -24,7 +24,7 @@ Package.on_use(function (api) {
   ], 'server')
 
   api.use([
-    'less', // just for internal styling!
+    'less@2.5.0', // just for internal styling!
     'templating',
     'tracker',
     'reactive-var',
@@ -36,7 +36,7 @@ Package.on_use(function (api) {
   api.add_files(['package-tap.i18n'], ["client", "server"]);
 
   // Bootstrap Server-side assets
-  api.add_files([
+  api.addAssets([
     // boostrap mixins
     'lib/less/bootstrap/mixins/alerts.import.less',
     'lib/less/bootstrap/mixins/background-variant.import.less',
@@ -113,14 +113,17 @@ Package.on_use(function (api) {
   ],"server");
 
   // Bootstrap Client-side Assets
-  api.add_files([
+  api.addAssets([
     'lib/fonts/glyphicons-halflings-regular.eot',
     'lib/fonts/glyphicons-halflings-regular.svg',
     'lib/fonts/glyphicons-halflings-regular.ttf',
     'lib/fonts/glyphicons-halflings-regular.woff',
-    'lib/fonts/glyphicons-halflings-regular.woff2',
-    'lib/bootstrap.js'
+    'lib/fonts/glyphicons-halflings-regular.woff2'
   ],"client");
+
+  api.add_files([
+    'lib/bootstrap.js'
+  ], "client")
 
 
   // Actual package logic
