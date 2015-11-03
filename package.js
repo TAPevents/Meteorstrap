@@ -1,7 +1,7 @@
 Package.describe({
   summary: 'A Reactive Bootstrap Theme Editor and Compiler',
   name: 'tap:meteorstrap',
-  version:'0.1.1',
+  version:'0.1.2',
   git:'https://github.com/TAPevents/meteorstrap'
 });
 
@@ -24,7 +24,7 @@ Package.on_use(function (api) {
   ], 'server')
 
   api.use([
-    'less@2.5.0', // just for internal styling!
+    'less', // just for internal styling!
     'templating',
     'tracker',
     'reactive-var',
@@ -35,7 +35,11 @@ Package.on_use(function (api) {
   // i18n
   api.add_files(['package-tap.i18n'], ["client", "server"]);
 
+  if(!api.addAssets){ // backwards compatability
+    api.addAssets = api.add_files;
+  }
   // Bootstrap Server-side assets
+
   api.addAssets([
     // boostrap mixins
     'lib/less/bootstrap/mixins/alerts.import.less',
