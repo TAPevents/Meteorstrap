@@ -1,7 +1,7 @@
 Package.describe({
   summary: 'A Reactive Bootstrap Theme Editor and Compiler',
   name: 'tap:meteorstrap',
-  version:'0.1.2',
+  version:'1.0.0',
   git:'https://github.com/TAPevents/meteorstrap'
 });
 
@@ -9,7 +9,7 @@ Npm.depends({'less':'2.5.1'})
 
 Package.on_use(function (api) {
 
-  api.versionsFrom('1.1.0.3');
+  api.versionsFrom('1.2.1');
 
   api.use([
     'coffeescript',
@@ -28,8 +28,8 @@ Package.on_use(function (api) {
     'templating',
     'tracker',
     'reactive-var',
-    'hitchcott:ez-modal@0.1.3',
-    'tap:bootstrap-magic@0.1.1'
+    'hitchcott:ez-modal@0.3.1',
+    'tap:bootstrap-magic@1.0.0'
   ], ['client']);
 
   // i18n
